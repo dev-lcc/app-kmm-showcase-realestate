@@ -8,3 +8,36 @@ captures
 .cxx
 local.properties
 xcuserdata
+
+#######################
+## Under iOS
+#######################
+iosApp/Pods/Manifest.lock
+iosApp/Pods/Pods.xcodeproj/project.pbxproj
+iosApp/Pods/Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig
+iosApp/Pods/Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig
+iosApp/Pods/Target Support Files/shared/shared.debug.xcconfig
+iosApp/Pods/Target Support Files/shared/shared.release.xcconfig
+
+# Xcode
+iosApp/build/*
+iosApp/*.pbxuser
+iosApp/!default.pbxuser
+iosApp/*.mode1v3
+iosApp/!default.mode1v3
+iosApp/*.mode2v3
+iosApp/!default.mode2v3
+iosApp/*.perspectivev3
+iosApp/!default.perspectivev3
+iosApp/!default.xcworkspace
+iosApp/xcuserdata
+iosApp/profile
+iosApp/*.moved-aside
+# Finder
+iosApp/.DS_Store
+iosApp/.svn
+iosApp/*.swp
+iosApp/*.~nib
+
+# Cocoapods
+iosApp/Pods/*
