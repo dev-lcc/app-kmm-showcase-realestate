@@ -2,5 +2,7 @@ platform :ios, '15.0'
 use_frameworks!
 
 target 'iosApp' do
-  pod 'shared', :path => '../shared'
+  pod 'data', :path => '../shared/core/data'
+  pod 'datastore', :path => '../shared/core/datastore'
+  pod 'model', :path => '../shared/core/model'
 end

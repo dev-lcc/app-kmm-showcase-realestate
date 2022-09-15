@@ -13,6 +13,12 @@ dependencyResolutionManagement {
     }
 }
 
+enableFeaturePreview("VERSION_CATALOGS")
+
 rootProject.name = "KMM_Showcase_Real_Estate"
 include(":androidApp")
-include(":shared")
+include(":shared:core:data")
+include(":shared:core:datastore")
+include(":shared:core:model")
+include(":shared:core:network")
+include(":shared:core:database")

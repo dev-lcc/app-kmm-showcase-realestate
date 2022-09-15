@@ -32,7 +32,10 @@ android {
 }
 
 dependencies {
-    implementation(project(":shared"))
+    implementation(project(":shared:core:data"))
+    implementation(project(":shared:core:datastore"))
+    implementation(project(":shared:core:model"))
+
     implementation("androidx.compose.ui:ui:1.2.1")
     implementation("androidx.compose.ui:ui-tooling:1.2.1")
     implementation("androidx.compose.ui:ui-tooling-preview:1.2.1")

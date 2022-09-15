@@ -1,0 +1,128 @@
+[versions]
+## SDK Versions
+minSdk = "21"
+targetSdk = "32"
+compileSdk = "32"
+
+kotlin = "1.7.10"
+gradlePluginAndroid = "7.2.2"
+
+# Dependencies
+desugarJdkLibs = "1.1.5"
+androidXCore = "1.9.0"
+activityCompose = "1.5.1"
+compose = "1.2.1"
+composeCompiler = "1.3.1"
+lifecycle = "2.5.1"
+roboelectric = "4.8.2"
+googleAccompanist = "v0.26.3-beta"
+
+coroutines = "1.6.4"
+multiplatformSettings = "0.9"
+koin = "3.2.1"
+ktor = "2.1.1"
+sqlDelight = "1.5.3"
+kotlinxDatetime = "0.4.0"
+
+touchlabKermit = "1.1.3"
+touchlabStately = "1.2.2"
+
+turbine = "0.10.0"
+
+junit = "4.13.2"
+junitKtx = "1.1.3"
+
+[libraries]
+android-desugaring = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugarJdkLibs" }
+androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidXCore" }
+androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
+androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+androidx-test-junit = { module = "androidx.test.ext:junit-ktx", version.ref = "junitKtx" }
+
+compose-compiler = { module = "androidx.compose.compiler:compiler", version.ref = "composeCompiler" }
+compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
+compose-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
+compose-material = { module = "androidx.compose.material:material", version.ref = "compose" }
+compose-activity = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+
+coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+
+google-accompanist-swipeRefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "googleAccompanist" }
+
+junit = { module = "junit:junit", version.ref = "junit" }
+
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
+
+kotlinx-dateTime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
+
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-ios = { module = "io.ktor:ktor-client-ios", version.ref = "ktor" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
+ktor-client-okHttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-client-contentNegotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
+
+multiplatformSettings-common = { module = "com.russhwolf:multiplatform-settings", version.ref = "multiplatformSettings" }
+multiplatformSettings-test = { module = "com.russhwolf:multiplatform-settings-test", version.ref = "multiplatformSettings" }
+
+roboelectric = { module = "org.robolectric:robolectric", version.ref = "roboelectric" }
+
+sqlDelight-android = { module = "com.squareup.sqldelight:android-driver", version.ref = "sqlDelight" }
+sqlDelight-jvm = { module = "com.squareup.sqldelight:sqlite-driver", version.ref = "sqlDelight" }
+sqlDelight-coroutinesExt = { module = "com.squareup.sqldelight:coroutines-extensions", version.ref = "sqlDelight" }
+sqlDelight-native = { module = "com.squareup.sqldelight:native-driver", version.ref = "sqlDelight" }
+sqlDelight-runtime = { module = "com.squareup.sqldelight:runtime", version.ref = "sqlDelight" }
+
+touchlab-kermit = { module = "co.touchlab:kermit", version.ref = "touchlabKermit" }
+touchlab-stately = { module = "co.touchlab:stately-common", version.ref = "touchlabStately" }
+
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+
+[plugins]
+androidApp = { id = "com.android.application", version.ref = "gradlePluginAndroid" }
+androidLibrary = { id = "com.android.library", version.ref = "gradlePluginAndroid" }
+kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+sqlDelight = { id = "com.squareup.sqldelight", version.ref = "sqlDelight" }
+
+[bundles]
+app-ui = [
+    "compose-compiler",
+    "androidx-core",
+    "androidx-lifecycle-runtime",
+    "androidx-lifecycle-viewmodel",
+    "compose-ui",
+    "compose-tooling",
+    "compose-foundation",
+    "compose-material",
+    "compose-activity",
+    "google-accompanist-swipeRefresh"
+]
+ktor-common = [
+    "ktor-client-core",
+    "ktor-client-logging",
+    "ktor-client-serialization",
+    "ktor-client-contentNegotiation"
+]
+shared-commonTest = [
+    "kotlin-test",
+    "multiplatformSettings-test",
+    "koin-test",
+    "turbine",
+    "coroutines-test",
+    "ktor-client-mock"
+]
+shared-androidTest = [
+    "androidx-test-junit",
+    "coroutines-test",
+    "roboelectric",
+    "sqlDelight-jvm"
+]
+

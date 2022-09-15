@@ -1,9 +1,13 @@
+// https://youtrack.jetbrains.com/issue/KTIJ-19369
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     //trick: for the same plugin versions in all sub-modules
-    id("com.android.application").version("7.2.2").apply(false)
-    id("com.android.library").version("7.2.2").apply(false)
-    kotlin("android").version("1.7.10").apply(false)
-    kotlin("multiplatform").version("1.7.10").apply(false)
+    alias(libs.plugins.androidApp).apply(false)
+    alias(libs.plugins.androidLibrary).apply(false)
+    alias(libs.plugins.kotlinAndroid).apply(false)
+    alias(libs.plugins.kotlinMultiplatform).apply(false)
+    alias(libs.plugins.kotlinSerialization).apply(false)
+    alias(libs.plugins.sqlDelight).apply(false)
 }
 
 tasks.register("clean", Delete::class) {
