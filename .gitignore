@@ -12,13 +12,6 @@ xcuserdata
 #######################
 ## Under iOS
 #######################
-iosApp/Pods/Manifest.lock
-iosApp/Pods/Pods.xcodeproj/project.pbxproj
-iosApp/Pods/Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig
-iosApp/Pods/Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig
-iosApp/Pods/Target Support Files/shared/shared.debug.xcconfig
-iosApp/Pods/Target Support Files/shared/shared.release.xcconfig
-
 # Xcode
 iosApp/build/*
 iosApp/*.pbxuser

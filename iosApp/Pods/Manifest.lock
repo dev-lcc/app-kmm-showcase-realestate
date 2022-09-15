@@ -1,16 +1,26 @@
 PODS:
-  - shared (1.0)
+  - data (1.0)
+  - datastore (1.0)
+  - model (1.0)
 
 DEPENDENCIES:
-  - shared (from `../shared`)
+  - data (from `../shared/core/data`)
+  - datastore (from `../shared/core/datastore`)
+  - model (from `../shared/core/model`)
 
 EXTERNAL SOURCES:
-  shared:
-    :path: "../shared"
+  data:
+    :path: "../shared/core/data"
+  datastore:
+    :path: "../shared/core/datastore"
+  model:
+    :path: "../shared/core/model"
 
 SPEC CHECKSUMS:
-  shared: 07cac7993e4f05eda6b76f3a213b070947c3b79f
+  data: 00bc9ef486d9ee8fc93a48f61f9f34ba15d3e16d
+  datastore: 2ee9c564c52edb5c9e9b7a542d165b6c55fd08bc
+  model: 20c71d867a33ea9805a50324151afb697474f3b2
 
-PODFILE CHECKSUM: 665fb1ca981801b8b5f16ab2b0baf9b61a1a33d2
+PODFILE CHECKSUM: f9cd13719e1afd7544d5888747cb00b42abd4bdc
 
 COCOAPODS: 1.10.2
