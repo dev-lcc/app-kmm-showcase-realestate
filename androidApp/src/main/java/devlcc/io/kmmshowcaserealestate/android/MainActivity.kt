@@ -16,7 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import devlcc.io.kmmshowcaserealestate.core.data.Greeting
+import devlcc.io.kmmshowcaserealestate.core.model.Property
 
 @Composable
 fun MyApplicationTheme(
@@ -66,7 +66,15 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting(Greeting().greeting())
+                    PropertyLabel(
+                        which = Property(
+                            propertyID = "M9941116325",
+                            listingID = "2946805109",
+                            propType = Property.Type.Condo,
+                            propSubType = Property.SubType.Condos,
+                            price = 2_500_000,
+                        )
+                    )
                 }
             }
         }
@@ -74,14 +82,22 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(text: String) {
-    Text(text = text)
+fun PropertyLabel(which: Property) {
+    Text(text = which.toString().replace(",", ",\n"))
 }
 
 @Preview
 @Composable
 fun DefaultPreview() {
     MyApplicationTheme {
-        Greeting("Hello, Android!")
+        PropertyLabel(
+            which = Property(
+                propertyID = "",
+                listingID = "",
+                propType = Property.Type.Condo,
+                propSubType = Property.SubType.Condos,
+                price = 2_500_000,
+            )
+        )
     }
 }

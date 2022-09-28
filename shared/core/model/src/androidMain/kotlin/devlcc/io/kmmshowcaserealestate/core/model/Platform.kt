@@ -1,7 +1,15 @@
 package devlcc.io.kmmshowcaserealestate.core.model
 
-class AndroidPlatform : Platform {
-    override val name: String = "Android ${android.os.Build.VERSION.SDK_INT}"
-}
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-actual fun getPlatform(): Platform = AndroidPlatform()
+/**
+ * shared implementation of parcelable
+ */
+actual typealias CommonParcelize = Parcelize
+
+actual typealias CommonParcelable = Parcelable
+
+// TODO:: Any Koin platform-specific module declaration
+
+// TODO:: Koin ViewModel module declaration

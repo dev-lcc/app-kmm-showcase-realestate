@@ -1,9 +1,7 @@
 package devlcc.io.kmmshowcaserealestate.core.model
 
-import platform.UIKit.UIDevice
+actual interface CommonParcelable
 
-class IOSPlatform: Platform {
-    override val name: String = UIDevice.currentDevice.systemName() + " " + UIDevice.currentDevice.systemVersion
-}
+// TODO:: Any Koin platform-specific module declaration
 
-actual fun getPlatform(): Platform = IOSPlatform()
+// TODO:: Koin ViewModel module declaration
