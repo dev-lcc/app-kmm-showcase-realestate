@@ -1,7 +1,14 @@
 package devlcc.io.kmmshowcaserealestate.core.model
 
-interface Platform {
-    val name: String
-}
+/**
+ *
+ * Common parcelable implementation for androis
+ */
 
-expect fun getPlatform(): Platform
+@OptIn(ExperimentalMultiplatform::class)
+@OptionalExpectation
+@Target(AnnotationTarget.CLASS)
+@Retention(AnnotationRetention.BINARY)
+expect annotation class CommonParcelize()
+
+expect interface CommonParcelable
