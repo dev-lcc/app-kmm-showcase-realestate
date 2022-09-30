@@ -8,7 +8,7 @@ Pod::Spec.new do |spec|
     spec.summary                  = 'Some description for the Shared Module'
     spec.vendored_frameworks      = 'build/cocoapods/framework/model.framework'
     spec.libraries                = 'c++'
-    spec.ios.deployment_target = '15.0'
+    spec.ios.deployment_target = '15.4'
                 
                 
     spec.pod_target_xcconfig = {

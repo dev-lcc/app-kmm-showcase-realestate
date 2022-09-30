@@ -24,7 +24,7 @@ struct ContentView: View {
         lastUpdate: "2022-09-09T18:41:04Z",
         clientDisplayFlags: nil,
         leadForms: nil,
-        photoCount: KotlinLong(integerLiteral: 14),
+        photoCount: KotlinInt(integerLiteral: 14),
         thumbnail: nil,
         pageNo: nil,
         rank: nil,

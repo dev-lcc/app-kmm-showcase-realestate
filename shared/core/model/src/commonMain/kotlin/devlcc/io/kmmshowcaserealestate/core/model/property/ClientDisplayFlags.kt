@@ -1,8 +1,11 @@
-package devlcc.io.kmmshowcaserealestate.core.model
+package devlcc.io.kmmshowcaserealestate.core.model.property
+
+import devlcc.io.kmmshowcaserealestate.core.model.CommonParcelable
+import devlcc.io.kmmshowcaserealestate.core.model.CommonParcelize
 
 @CommonParcelize
 data class ClientDisplayFlags(
-    val presentationStatus: String? = null,
+    val presentationStatus: PresentationStatus? = null,
     val isShowcase: Boolean? = null,
     val leadFormPhoneRequired: Boolean? = null,
     val priceChange: Long? = null,
@@ -20,4 +23,13 @@ data class ClientDisplayFlags(
     val flipTheMarketEnabled: Boolean? = null,
     val isShowcaseChoiceEnabled: Boolean? = null,
     val hasMatterport: Boolean? = null
-) : CommonParcelable
+) : CommonParcelable {
+
+    @CommonParcelize
+    enum class PresentationStatus: CommonParcelable {
+        ForSale,    // "for_sale"
+        ForRent,    // "for_rent"
+        RecentlySold,   // "recently_sold"
+    }
+
+}

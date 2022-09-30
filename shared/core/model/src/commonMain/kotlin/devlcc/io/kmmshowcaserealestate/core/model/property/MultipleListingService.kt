@@ -1,4 +1,7 @@
-package devlcc.io.kmmshowcaserealestate.core.model
+package devlcc.io.kmmshowcaserealestate.core.model.property
+
+import devlcc.io.kmmshowcaserealestate.core.model.CommonParcelable
+import devlcc.io.kmmshowcaserealestate.core.model.CommonParcelize
 
 /**
  * MLS
@@ -9,12 +12,12 @@ data class MultipleListingService(
     val name: String? = null,
     val planID: String? = null,
     val abbreviation: String? = null,
-    val type: MultipleListingService.Type? = null,
+    val type: Type? = null,
 ) : CommonParcelable {
 
     @CommonParcelize
     enum class Type : CommonParcelable {
-        Mls
+        Mls // "mls"
     }
 
 }
