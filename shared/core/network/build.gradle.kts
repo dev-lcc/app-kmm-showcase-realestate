@@ -15,7 +15,8 @@ kotlin {
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
         version = "1.0"
-        ios.deploymentTarget = "15.0"
+        ios.deploymentTarget = "15.4"
+        podfile = project.file("../../../iosApp/Podfile")
         framework {
             baseName = "network"
         }
@@ -27,16 +28,17 @@ kotlin {
                 implementation(project(":shared:core:model"))
                 implementation(project(":shared:core:datastore"))
 
-                implementation(libs.kotlinx.dateTime)
                 implementation(libs.coroutines.core)
+
                 implementation(libs.koin.core)
+
+                implementation(libs.kotlinx.serialization.json)
+                implementation(libs.kotlinx.dateTime)
 
                 implementation(libs.bundles.ktor.common)
 
-                implementation(libs.multiplatformSettings.common)
-
                 implementation(libs.touchlab.stately)
-                api(libs.touchlab.kermit)
+                implementation(libs.touchlab.kermit)
             }
         }
         val commonTest by getting {
@@ -81,9 +83,9 @@ kotlin {
 
 android {
     namespace = "devlcc.io.kmmshowcaserealestate.core.network"
-    compileSdk = 32
+    compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
-        minSdk = 21
-        targetSdk = 32
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
     }
 }

@@ -2,6 +2,7 @@ plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
+    id("com.rickclephas.kmp.nativecoroutines")
 }
 
 kotlin {
@@ -14,7 +15,7 @@ kotlin {
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
         version = "1.0"
-        ios.deploymentTarget = "15.0"
+        ios.deploymentTarget = "15.4"
         podfile = project.file("../../../iosApp/Podfile")
         framework {
             baseName = "data"
@@ -39,7 +40,9 @@ kotlin {
                 implementation(project(":shared:core:network"))
                 implementation(project(":shared:core:database"))
 
-                api(libs.touchlab.kermit)
+                implementation(libs.koin.core)
+                implementation(libs.kotlinx.serialization.json)
+                implementation(libs.touchlab.kermit)
             }
         }
         val commonTest by getting {
@@ -72,9 +75,9 @@ kotlin {
 
 android {
     namespace = "devlcc.io.kmmshowcaserealestate.core.data"
-    compileSdk = 32
+    compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
-        minSdk = 21
-        targetSdk = 32
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
     }
 }

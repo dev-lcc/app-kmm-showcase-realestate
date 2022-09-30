@@ -5,19 +5,19 @@ plugins {
 
 android {
     namespace = "devlcc.io.kmmshowcaserealestate.android"
-    compileSdk = 32
+    compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
         applicationId = "devlcc.io.kmmshowcaserealestate.android"
-        minSdk = 21
-        targetSdk = 32
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
-        versionName = "1.0"
+        versionName = rootProject.extra["versionName"].toString()
     }
     buildFeatures {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.3.0"
+        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
     packagingOptions {
         resources {
@@ -25,8 +25,15 @@ android {
         }
     }
     buildTypes {
-        getByName("release") {
+        getByName("debug") {
             isMinifyEnabled = false
+
+            manifestPlaceholders["appName"] = "${rootProject.extra["appName"]}-debug"
+        }
+        getByName("release") {
+            isMinifyEnabled = true
+
+            manifestPlaceholders["appName"] = "${rootProject.extra["appName"]}"
         }
     }
 }
@@ -36,10 +43,10 @@ dependencies {
     implementation(project(":shared:core:datastore"))
     implementation(project(":shared:core:model"))
 
-    implementation("androidx.compose.ui:ui:1.2.1")
-    implementation("androidx.compose.ui:ui-tooling:1.2.1")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.2.1")
-    implementation("androidx.compose.foundation:foundation:1.2.1")
-    implementation("androidx.compose.material:material:1.2.1")
-    implementation("androidx.activity:activity-compose:1.5.1")
+    implementation(libs.compose.ui)
+    implementation(libs.compose.tooling)
+    implementation(libs.compose.tooling.preview)
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.material)
+    implementation(libs.compose.activity)
 }

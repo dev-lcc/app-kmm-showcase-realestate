@@ -1,4 +1,7 @@
-package devlcc.io.kmmshowcaserealestate.core.model
+package devlcc.io.kmmshowcaserealestate.core.model.property
+
+import devlcc.io.kmmshowcaserealestate.core.model.CommonParcelable
+import devlcc.io.kmmshowcaserealestate.core.model.CommonParcelize
 
 @CommonParcelize
 data class Property(
@@ -32,7 +35,7 @@ data class Property(
 
     val leadForms: LeadForms? = null,
 
-    val photoCount: Long? = null,
+    val photoCount: Int? = null,
     val thumbnail: String? = null,  // Image URL
 
     val pageNo: Int? = null,

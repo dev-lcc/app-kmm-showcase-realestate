@@ -1,9 +1,11 @@
 package devlcc.io.kmmshowcaserealestate.core.network
 
-import platform.UIKit.UIDevice
+import io.ktor.client.engine.*
+import io.ktor.client.engine.darwin.*
+import org.koin.dsl.module
 
-class IOSPlatform: Platform {
-    override val name: String = UIDevice.currentDevice.systemName() + " " + UIDevice.currentDevice.systemVersion
+actual val platformNetworkModule = module {
+    single<HttpClientEngine> {
+        Darwin.create {}
+    }
 }
-
-actual fun getPlatform(): Platform = IOSPlatform()

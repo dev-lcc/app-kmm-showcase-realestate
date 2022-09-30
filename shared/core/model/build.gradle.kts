@@ -15,7 +15,7 @@ kotlin {
         summary = "Some description for the Shared Module"
         homepage = "Link to the Shared Module homepage"
         version = "1.0"
-        ios.deploymentTarget = "15.0"
+        ios.deploymentTarget = "15.4"
         podfile = project.file("../../../iosApp/Podfile")
         framework {
             baseName = "model"
@@ -64,9 +64,9 @@ kotlin {
 
 android {
     namespace = "devlcc.io.kmmshowcaserealestate.core.model"
-    compileSdk = 32
+    compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
-        minSdk = 21
-        targetSdk = 32
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
     }
 }
