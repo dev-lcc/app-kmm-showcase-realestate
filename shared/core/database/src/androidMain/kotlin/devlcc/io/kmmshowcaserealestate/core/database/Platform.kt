@@ -1,7 +1,18 @@
+@file:JvmName("PlatformJvmCoreDatabase")
+
 package devlcc.io.kmmshowcaserealestate.core.database
 
-class AndroidPlatform : Platform {
-    override val name: String = "Android ${android.os.Build.VERSION.SDK_INT}"
-}
+import android.content.Context
+import com.squareup.sqldelight.android.AndroidSqliteDriver
+import com.squareup.sqldelight.db.SqlDriver
+import org.koin.dsl.module
 
-actual fun getPlatform(): Platform = AndroidPlatform()
+actual val platformDatabaseModule = module {
+    single<SqlDriver> {
+        AndroidSqliteDriver(
+            KMMShowcaseRealEstateDb.Schema,
+            get<Context>(),
+            DB_NAME
+        )
+    }
+}

@@ -1,4 +1,4 @@
-@file:JvmName("PlatformJvm")
+@file:JvmName("PlatformJvmCoreNetwork")
 
 package devlcc.io.kmmshowcaserealestate.core.network
 

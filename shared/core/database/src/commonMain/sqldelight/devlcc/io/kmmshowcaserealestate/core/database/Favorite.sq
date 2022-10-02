@@ -1,0 +1,37 @@
+CREATE TABLE Favorite (
+    propertyID TEXT NOT NULL PRIMARY KEY,
+    createdAt TEXT NOT NULL,
+    FOREIGN KEY (propertyID)
+        REFERENCES Property (propertyID)
+            ON DELETE CASCADE
+            ON UPDATE NO ACTION
+);
+
+getFavoritesASC:
+SELECT p.* FROM Favorite f
+JOIN Property p ON p.propertyID = f.propertyID
+ORDER BY CASE
+    WHEN :sortField = 'propertyID' THEN p.propertyID
+    WHEN :sortField = 'price' THEN p.price
+    WHEN :sortField = 'lastUpdate' THEN p.lastUpdate
+    WHEN :sortField = 'rank' THEN p.rank
+    ELSE p.propertyID END ASC
+LIMIT :page, :docsPerPage;
+
+getFavoritesDESC:
+SELECT p.* FROM Favorite f
+JOIN Property p ON p.propertyID = f.propertyID
+ORDER BY CASE
+    WHEN :sortField = 'propertyID' THEN p.propertyID
+    WHEN :sortField = 'price' THEN p.price
+    WHEN :sortField = 'lastUpdate' THEN p.lastUpdate
+    WHEN :sortField = 'rank' THEN p.rank
+    ELSE p.propertyID END DESC
+LIMIT :page, :docsPerPage;
+
+addToFavorites:
+INSERT OR IGNORE INTO Favorite(propertyID, createdAt)
+VALUES (:propertyID, :createdAt);
+
+removeFromFavorites:
+DELETE FROM Favorite WHERE propertyID = :propertyID;

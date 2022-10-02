@@ -3,6 +3,7 @@ plugins {
     kotlin("native.cocoapods")
     id("com.android.library")
     id("com.squareup.sqldelight")
+    id("kotlinx-serialization")
 }
 
 kotlin {
@@ -19,6 +20,8 @@ kotlin {
         podfile = project.file("../../../iosApp/Podfile")
         framework {
             baseName = "database"
+            isStatic = false
+            linkerOpts("-lsqlite3")
         }
     }
 
@@ -35,14 +38,33 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(project(":shared:core:model"))
+
+                implementation(libs.coroutines.core)
+
+                implementation(libs.koin.core)
+
+                implementation(libs.kotlinx.serialization.json)
+
+                implementation(libs.kotlinx.dateTime)
+
+                implementation(libs.touchlab.stately)
+                implementation(libs.touchlab.kermit)
+
+                implementation(libs.sqlDelight.runtime)
+                implementation(libs.sqlDelight.coroutinesExt)
             }
         }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
+                implementation(libs.koin.test)
             }
         }
-        val androidMain by getting
+        val androidMain by getting {
+            dependencies {
+                implementation(libs.sqlDelight.android)
+            }
+        }
         val androidTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
@@ -52,6 +74,10 @@ kotlin {
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
+
+            dependencies {
+                implementation(libs.sqlDelight.native)
+            }
         }
         val iosX64Test by getting
         val iosArm64Test by getting

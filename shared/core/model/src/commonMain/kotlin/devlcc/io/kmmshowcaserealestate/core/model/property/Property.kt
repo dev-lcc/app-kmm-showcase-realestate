@@ -82,4 +82,32 @@ data class Property(
         NotForSale,  // "not_for_sale"
     }
 
+    @CommonParcelize
+    data class Sort(
+        val field: Sort.Field,
+        val order: Sort.Order,
+    ): CommonParcelable {
+
+        @CommonParcelize
+        enum class Field(val value: String): CommonParcelable {
+            ByPropertyID("propertyID"),
+            ByPrice("price"),
+            ByLastUpdate("lastUpdate"),
+            ByRank("rank"),
+        }
+
+        @CommonParcelize
+        enum class Order: CommonParcelable {
+            Ascending,
+            Descending,
+        }
+
+        companion object {
+            val Default = Sort(
+                field = Field.ByPrice,
+                order = Order.Descending
+            )
+        }
+
+    }
 }

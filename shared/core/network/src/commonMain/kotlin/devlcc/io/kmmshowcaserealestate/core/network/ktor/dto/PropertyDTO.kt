@@ -1,4 +1,4 @@
-package devlcc.io.kmmshowcaserealestate.core.network.dto.property
+package devlcc.io.kmmshowcaserealestate.core.network.ktor.dto
 
 import devlcc.io.kmmshowcaserealestate.core.model.property.MultipleListingService
 import devlcc.io.kmmshowcaserealestate.core.model.property.Property

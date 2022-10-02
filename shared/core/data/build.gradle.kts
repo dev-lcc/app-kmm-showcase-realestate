@@ -20,6 +20,7 @@ kotlin {
         framework {
             baseName = "data"
             isStatic = false // SwiftUI preview requires dynamic framework
+            linkerOpts("-lsqlite3")
         }
     }
 

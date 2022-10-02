@@ -1,4 +1,4 @@
-package devlcc.io.kmmshowcaserealestate.core.network.api
+package devlcc.io.kmmshowcaserealestate.core.network
 
 import devlcc.io.kmmshowcaserealestate.core.model.property.Property
 
