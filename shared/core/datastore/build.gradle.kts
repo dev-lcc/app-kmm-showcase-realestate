@@ -36,7 +36,19 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(project(":shared:core:model"))
+
                 implementation(libs.multiplatformSettings.common)
+
+                implementation(libs.coroutines.core)
+
+                implementation(libs.koin.core)
+
+                implementation(libs.kotlinx.serialization.json)
+
+                implementation(libs.kotlinx.dateTime)
+
+                implementation(libs.touchlab.kermit)
+
             }
         }
         val commonTest by getting {

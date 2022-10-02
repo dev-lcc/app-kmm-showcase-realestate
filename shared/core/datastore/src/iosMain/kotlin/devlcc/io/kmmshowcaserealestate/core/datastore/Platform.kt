@@ -1,9 +1,23 @@
 package devlcc.io.kmmshowcaserealestate.core.datastore
 
-import platform.UIKit.UIDevice
+import com.russhwolf.settings.NSUserDefaultsSettings
+import com.russhwolf.settings.Settings
+import org.koin.core.module.Module
+import org.koin.dsl.module
+import platform.Foundation.NSUserDefaults
 
-class IOSPlatform: Platform {
-    override val name: String = UIDevice.currentDevice.systemName() + " " + UIDevice.currentDevice.systemVersion
+actual val platformDatastoreModule: Module = module {
+
+    single<NSUserDefaults> {
+        provideNSUserDefaults()
+    }
+
+    single<Settings> {
+        NSUserDefaultsSettings(
+            delegate = get(),
+            useFrozenListeners = false,
+        )
+    }
 }
 
-actual fun getPlatform(): Platform = IOSPlatform()
+internal fun provideNSUserDefaults() = NSUserDefaults(suiteName = SETTINGS_NAME)
