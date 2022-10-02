@@ -1,9 +1,14 @@
 package devlcc.io.kmmshowcaserealestate.core.database
 
-import platform.UIKit.UIDevice
+import com.squareup.sqldelight.db.SqlDriver
+import com.squareup.sqldelight.drivers.native.NativeSqliteDriver
+import org.koin.dsl.module
 
-class IOSPlatform: Platform {
-    override val name: String = UIDevice.currentDevice.systemName() + " " + UIDevice.currentDevice.systemVersion
+actual val platformDatabaseModule = module {
+    single<SqlDriver> {
+        NativeSqliteDriver(
+            schema = KMMShowcaseRealEstateDb.Schema,
+            name = DB_NAME,
+        )
+    }
 }
-
-actual fun getPlatform(): Platform = IOSPlatform()

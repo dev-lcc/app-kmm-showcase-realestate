@@ -1,0 +1,121 @@
+CREATE TABLE Property (
+    propertyID TEXT NOT NULL PRIMARY KEY,
+    listingID TEXT,
+    products TEXT,
+    rdcWebURL TEXT,
+    propType TEXT,
+    propSubType TEXT,
+    virtualTour TEXT,
+    address TEXT,
+    branding TEXT,
+    propStatus TEXT,
+    price INTEGER,
+    bathsFull INTEGER,
+    baths INTEGER,
+    beds INTEGER,
+    buildingSize TEXT,
+    openHouses TEXT,
+    agents TEXT,
+    office TEXT,
+    lastUpdate TEXT,
+    clientDisplayFlags TEXT,
+    leadForms TEXT,
+    photoCount INTEGER,
+    thumbnail TEXT,
+    pageNo INTEGER,
+    rank INTEGER,
+    listTracking TEXT,
+    mls TEXT,
+    dataSourceName TEXT
+);
+
+getPropertiesByStatusASC:
+SELECT * FROM Property
+WHERE propStatus = :propStatus
+ORDER BY CASE
+    WHEN :sortField = 'propertyID' THEN propertyID
+    WHEN :sortField = 'price' THEN price
+    WHEN :sortField = 'lastUpdate' THEN lastUpdate
+    WHEN :sortField = 'rank' THEN rank
+    ELSE propertyID END ASC
+LIMIT :page, :docsPerPage;
+
+getPropertiesByStatusDESC:
+SELECT * FROM Property
+WHERE propStatus = :propStatus
+ORDER BY CASE
+    WHEN :sortField = 'propertyID' THEN propertyID
+    WHEN :sortField = 'price' THEN price
+    WHEN :sortField = 'lastUpdate' THEN lastUpdate
+    WHEN :sortField = 'rank' THEN rank
+    ELSE propertyID END DESC
+LIMIT :page, :docsPerPage;
+
+getPropertiesByTypeASC:
+SELECT * FROM Property
+WHERE propType = :propType
+ORDER BY CASE
+    WHEN :sortField = 'propertyID' THEN propertyID
+    WHEN :sortField = 'price' THEN price
+    WHEN :sortField = 'lastUpdate' THEN lastUpdate
+    WHEN :sortField = 'rank' THEN rank
+    ELSE propertyID END ASC
+LIMIT :page, :docsPerPage;
+
+getPropertiesByTypeDESC:
+SELECT * FROM Property
+WHERE propType = :propType
+ORDER BY CASE
+    WHEN :sortField = 'propertyID' THEN propertyID
+    WHEN :sortField = 'price' THEN price
+    WHEN :sortField = 'lastUpdate' THEN lastUpdate
+    WHEN :sortField = 'rank' THEN rank
+    ELSE propertyID END DESC
+LIMIT :page, :docsPerPage;
+
+searchPropertiesASC:
+SELECT * FROM Property
+WHERE
+(
+    propType LIKE :keyword
+    OR propSubType LIKE :keyword
+    OR address LIKE :keyword
+    OR branding LIKE :keyword
+    OR agents LIKE :keyword
+    OR office LIKE :keyword
+)
+ORDER BY CASE
+    WHEN :sortField = 'propertyID' THEN propertyID
+    WHEN :sortField = 'price' THEN price
+    WHEN :sortField = 'lastUpdate' THEN lastUpdate
+    WHEN :sortField = 'rank' THEN rank
+    ELSE propertyID END ASC
+LIMIT :page, :docsPerPage;
+
+searchPropertiesDESC:
+SELECT * FROM Property
+WHERE
+(
+    propType LIKE :keyword
+    OR propSubType LIKE :keyword
+    OR address LIKE :keyword
+    OR branding LIKE :keyword
+    OR agents LIKE :keyword
+    OR office LIKE :keyword
+)
+ORDER BY CASE
+    WHEN :sortField = 'propertyID' THEN propertyID
+    WHEN :sortField = 'price' THEN price
+    WHEN :sortField = 'lastUpdate' THEN lastUpdate
+    WHEN :sortField = 'rank' THEN rank
+    ELSE propertyID END DESC
+LIMIT :page, :docsPerPage;
+
+getProperty:
+SELECT * FROM Property WHERE propertyID = :propertyID;
+
+upsertProperty:
+INSERT OR REPLACE INTO Property(
+propertyID, listingID, products, rdcWebURL, propType, propSubType, virtualTour, address, branding, propStatus, price, bathsFull, baths, beds, buildingSize, openHouses, agents, office, lastUpdate, clientDisplayFlags, leadForms, photoCount, thumbnail, pageNo, rank, listTracking, mls, dataSourceName)
+VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, ?)
+;
