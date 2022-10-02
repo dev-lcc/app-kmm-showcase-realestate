@@ -1,9 +1,9 @@
-package devlcc.io.kmmshowcaserealestate.core.network.api.ktor
+package devlcc.io.kmmshowcaserealestate.core.network.ktor.api
 
 import devlcc.io.kmmshowcaserealestate.core.model.property.Property
-import devlcc.io.kmmshowcaserealestate.core.network.api.PropertiesApiService
-import devlcc.io.kmmshowcaserealestate.core.network.dto.property.GetPropertiesResponse
-import devlcc.io.kmmshowcaserealestate.core.network.dto.property.toModel
+import devlcc.io.kmmshowcaserealestate.core.network.PropertiesApiService
+import devlcc.io.kmmshowcaserealestate.core.network.ktor.dto.GetPropertiesResponse
+import devlcc.io.kmmshowcaserealestate.core.network.ktor.dto.toModel
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*

@@ -3,8 +3,7 @@
 package devlcc.io.kmmshowcaserealestate.core.network
 
 import co.touchlab.kermit.Logger
-import devlcc.io.kmmshowcaserealestate.core.network.api.PropertiesApiService
-import devlcc.io.kmmshowcaserealestate.core.network.api.ktor.PropertiesApiServiceImpl
+import devlcc.io.kmmshowcaserealestate.core.network.ktor.api.PropertiesApiServiceImpl
 import io.ktor.client.*
 import io.ktor.client.engine.*
 import io.ktor.client.plugins.*

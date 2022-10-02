@@ -1,4 +1,4 @@
-package devlcc.io.kmmshowcaserealestate.core.network.dto.property
+package devlcc.io.kmmshowcaserealestate.core.network.ktor.dto
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerialName
