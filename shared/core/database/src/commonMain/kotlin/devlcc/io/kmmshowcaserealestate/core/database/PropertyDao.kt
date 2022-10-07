@@ -39,4 +39,6 @@ interface PropertyDao {
 
     suspend fun upsert(property: Property)
 
+    suspend fun upsert(batchCount: Int = 10, vararg properties: Property)
+
 }

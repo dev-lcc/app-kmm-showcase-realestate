@@ -6,13 +6,15 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 import kotlin.jvm.JvmName
 
-val coreDatastoreModule: Module = module {
-    single<AppDatastore> {
-        AppDatastoreImpl(
-            settings = get()
-        )
-    }
-}.apply { includes(platformDatastoreModule) }
+fun getCoreDatastoreModule(): Module = module {
+//    single<AppDatastore> {
+//        AppDatastoreImpl(
+//            settings = get()
+//        )
+//    }
+
+    includes(platformDatastoreModule)
+}
 
 internal const val SETTINGS_NAME = "KMMRealEstateShowcase"
 

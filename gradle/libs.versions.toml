@@ -17,6 +17,8 @@ lifecycle = "2.5.1"
 roboelectric = "4.8.2"
 googleAccompanist = "v0.26.3-beta"
 
+workManager = "2.7.1"
+
 coroutines = "1.6.4"
 kmpNativeCoroutines = "0.13.0"
 multiplatformSettings = "1.0.0-alpha01"
@@ -75,6 +77,9 @@ multiplatformSettings-common = { module = "com.russhwolf:multiplatform-settings"
 multiplatformSettings-test = { module = "com.russhwolf:multiplatform-settings-test", version.ref = "multiplatformSettings" }
 
 roboelectric = { module = "org.robolectric:robolectric", version.ref = "roboelectric" }
+
+workManager-runtime = { module = "androidx.work:work-runtime-ktx", version.ref = "workManager" }
+workManager-test = { module = "androidx.work:work-testing", version.ref = "workManager" }
 
 sqlDelight-android = { module = "com.squareup.sqldelight:android-driver", version.ref = "sqlDelight" }
 sqlDelight-jvm = { module = "com.squareup.sqldelight:sqlite-driver", version.ref = "sqlDelight" }

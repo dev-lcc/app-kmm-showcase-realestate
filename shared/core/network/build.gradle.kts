@@ -19,6 +19,7 @@ kotlin {
         podfile = project.file("../../../iosApp/Podfile")
         framework {
             baseName = "network"
+            isStatic = false
         }
     }
     

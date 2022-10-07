@@ -19,7 +19,7 @@ kotlin {
         podfile = project.file("../../../iosApp/Podfile")
         framework {
             baseName = "datastore"
-            isStatic = false // SwiftUI preview requires dynamic framework
+            isStatic = false
         }
     }
 
