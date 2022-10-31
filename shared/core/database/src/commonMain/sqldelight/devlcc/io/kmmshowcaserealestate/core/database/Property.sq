@@ -38,7 +38,7 @@ ORDER BY CASE
     WHEN :sortField = 'lastUpdate' THEN lastUpdate
     WHEN :sortField = 'rank' THEN rank
     ELSE propertyID END ASC
-LIMIT :page, :docsPerPage;
+LIMIT :offset, :docsPerPage;
 
 getPropertiesByStatusDESC:
 SELECT * FROM Property
@@ -49,7 +49,7 @@ ORDER BY CASE
     WHEN :sortField = 'lastUpdate' THEN lastUpdate
     WHEN :sortField = 'rank' THEN rank
     ELSE propertyID END DESC
-LIMIT :page, :docsPerPage;
+LIMIT :offset, :docsPerPage;
 
 getPropertiesByTypeASC:
 SELECT * FROM Property
@@ -60,7 +60,7 @@ ORDER BY CASE
     WHEN :sortField = 'lastUpdate' THEN lastUpdate
     WHEN :sortField = 'rank' THEN rank
     ELSE propertyID END ASC
-LIMIT :page, :docsPerPage;
+LIMIT :offset, :docsPerPage;
 
 getPropertiesByTypeDESC:
 SELECT * FROM Property
@@ -71,7 +71,7 @@ ORDER BY CASE
     WHEN :sortField = 'lastUpdate' THEN lastUpdate
     WHEN :sortField = 'rank' THEN rank
     ELSE propertyID END DESC
-LIMIT :page, :docsPerPage;
+LIMIT :offset, :docsPerPage;
 
 searchPropertiesASC:
 SELECT * FROM Property
@@ -90,7 +90,7 @@ ORDER BY CASE
     WHEN :sortField = 'lastUpdate' THEN lastUpdate
     WHEN :sortField = 'rank' THEN rank
     ELSE propertyID END ASC
-LIMIT :page, :docsPerPage;
+LIMIT :offset, :docsPerPage;
 
 searchPropertiesDESC:
 SELECT * FROM Property
@@ -109,7 +109,7 @@ ORDER BY CASE
     WHEN :sortField = 'lastUpdate' THEN lastUpdate
     WHEN :sortField = 'rank' THEN rank
     ELSE propertyID END DESC
-LIMIT :page, :docsPerPage;
+LIMIT :offset, :docsPerPage;
 
 getProperty:
 SELECT * FROM Property WHERE propertyID = :propertyID;

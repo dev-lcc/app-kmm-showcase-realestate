@@ -7,9 +7,27 @@ plugins {
 
 kotlin {
     android()
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
+    iosX64() {
+        binaries {
+            sharedLib {
+                baseName = "model"
+            }
+        }
+    }
+    iosArm64() {
+        binaries {
+            sharedLib {
+                baseName = "model"
+            }
+        }
+    }
+    iosSimulatorArm64() {
+        binaries {
+            sharedLib {
+                baseName = "model"
+            }
+        }
+    }
 
     cocoapods {
         summary = "Some description for the Shared Module"
@@ -17,6 +35,7 @@ kotlin {
         version = "1.0"
         ios.deploymentTarget = "15.4"
         podfile = project.file("../../../iosApp/Podfile")
+
         framework {
             baseName = "model"
             isStatic = false // SwiftUI preview requires dynamic framework

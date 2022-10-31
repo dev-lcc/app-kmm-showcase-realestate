@@ -42,7 +42,9 @@ kotlin {
                 implementation(project(":shared:core:database"))
 
                 implementation(libs.koin.core)
+
                 implementation(libs.kotlinx.serialization.json)
+
                 implementation(libs.touchlab.kermit)
             }
         }
@@ -51,8 +53,18 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting
-        val androidTest by getting
+        val androidMain by getting {
+            dependencies {
+                implementation(libs.workManager.runtime)
+
+                implementation(libs.koin.android)
+            }
+        }
+        val androidTest by getting {
+            dependencies {
+                implementation(libs.workManager.test)
+            }
+        }
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting

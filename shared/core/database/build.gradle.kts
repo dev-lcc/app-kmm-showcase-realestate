@@ -37,7 +37,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(project(":shared:core:model"))
+                api(project(":shared:core:model"))
 
                 implementation(libs.coroutines.core)
 

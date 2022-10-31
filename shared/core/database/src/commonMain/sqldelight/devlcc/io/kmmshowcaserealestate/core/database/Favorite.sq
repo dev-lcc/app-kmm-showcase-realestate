@@ -16,7 +16,7 @@ ORDER BY CASE
     WHEN :sortField = 'lastUpdate' THEN p.lastUpdate
     WHEN :sortField = 'rank' THEN p.rank
     ELSE p.propertyID END ASC
-LIMIT :page, :docsPerPage;
+LIMIT :offset, :docsPerPage;
 
 getFavoritesDESC:
 SELECT p.* FROM Favorite f
@@ -27,7 +27,7 @@ ORDER BY CASE
     WHEN :sortField = 'lastUpdate' THEN p.lastUpdate
     WHEN :sortField = 'rank' THEN p.rank
     ELSE p.propertyID END DESC
-LIMIT :page, :docsPerPage;
+LIMIT :offset, :docsPerPage;
 
 addToFavorites:
 INSERT OR IGNORE INTO Favorite(propertyID, createdAt)
