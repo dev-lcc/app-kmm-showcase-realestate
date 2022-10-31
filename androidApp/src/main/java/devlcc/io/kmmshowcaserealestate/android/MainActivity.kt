@@ -16,7 +16,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import co.touchlab.kermit.Logger
+import devlcc.io.kmmshowcaserealestate.android.listings.Listings
 import devlcc.io.kmmshowcaserealestate.core.model.property.Property
+import devlcc.io.kmmshowcaserealestate.viewmodel.home.ListingsViewModel
+import org.koin.android.ext.android.getKoin
 
 @Composable
 fun MyApplicationTheme(
@@ -66,14 +70,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    PropertyLabel(
-                        which = Property(
-                            propertyID = "M9941116325",
-                            listingID = "2946805109",
-                            propType = Property.Type.Condo,
-                            propSubType = Property.SubType.Condos,
-                            price = 2_500_000,
-                        )
+                    Listings(
+                        viewModel = getKoin().get<ListingsViewModel>(),
+                        logger = getKoin().get<Logger>(),
                     )
                 }
             }
@@ -81,23 +80,10 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun PropertyLabel(which: Property) {
-    Text(text = which.toString().replace(",", ",\n"))
-}
-
-@Preview
-@Composable
-fun DefaultPreview() {
-    MyApplicationTheme {
-        PropertyLabel(
-            which = Property(
-                propertyID = "",
-                listingID = "",
-                propType = Property.Type.Condo,
-                propSubType = Property.SubType.Condos,
-                price = 2_500_000,
-            )
-        )
-    }
-}
+//@Preview
+//@Composable
+//fun DefaultPreview() {
+//    MyApplicationTheme {
+// TODO:: Provide mock viewModel and logger instance
+//    }
+//}

@@ -5,6 +5,7 @@
         android:allowBackup="false"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:name=".KMMShowcaseRealEstateApplication"
         android:label="${appName}"
         >
         <activity
