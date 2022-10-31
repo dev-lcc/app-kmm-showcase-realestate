@@ -42,6 +42,7 @@ dependencies {
     implementation(project(":shared:core:data"))
     implementation(project(":shared:core:datastore"))
     implementation(project(":shared:core:model"))
+    implementation(project(":shared:viewmodel"))
 
     implementation(libs.compose.ui)
     implementation(libs.compose.tooling)
@@ -49,4 +50,10 @@ dependencies {
     implementation(libs.compose.foundation)
     implementation(libs.compose.material)
     implementation(libs.compose.activity)
+
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    implementation(libs.koin.test)
+
+    implementation(libs.touchlab.kermit)
 }

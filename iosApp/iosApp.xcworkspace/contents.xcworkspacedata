@@ -1,6 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
+   <Group
+      location = "container:"
+      name = "KotlinSharedCoreDatabase">
+      <FileRef
+         location = "group:../shared/core/database/src/commonMain">
+      </FileRef>
+      <FileRef
+         location = "group:../shared/core/database/src/iosMain">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "KotlinSharedCoreNetwork">
+      <FileRef
+         location = "group:../shared/core/network/src/commonMain">
+      </FileRef>
+      <FileRef
+         location = "group:../shared/core/network/src/iosMain">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "KotlinSharedCoreDatastore">
+      <FileRef
+         location = "group:../shared/core/datastore/src/commonMain">
+      </FileRef>
+      <FileRef
+         location = "group:../shared/core/datastore/src/iosMain">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "KotlinSharedCoreModel">
+      <FileRef
+         location = "group:../shared/core/model/src/commonMain">
+      </FileRef>
+      <FileRef
+         location = "group:../shared/core/model/src/iosMain">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "KotlinSharedCoreData">
+      <FileRef
+         location = "group:../shared/core/data/src/commonMain">
+      </FileRef>
+      <FileRef
+         location = "group:../shared/core/data/src/iosMain">
+      </FileRef>
+   </Group>
    <FileRef
       location = "group:iosApp.xcodeproj">
    </FileRef>
