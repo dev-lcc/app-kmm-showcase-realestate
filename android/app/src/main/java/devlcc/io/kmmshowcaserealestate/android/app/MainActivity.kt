@@ -1,4 +1,4 @@
-package devlcc.io.kmmshowcaserealestate.android
+package devlcc.io.kmmshowcaserealestate.android.app
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -13,12 +13,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import co.touchlab.kermit.Logger
-import devlcc.io.kmmshowcaserealestate.android.listings.Listings
-import devlcc.io.kmmshowcaserealestate.core.model.property.Property
+import devlcc.io.kmmshowcaserealestate.android.app.listings.Listings
 import devlcc.io.kmmshowcaserealestate.viewmodel.home.ListingsViewModel
 import org.koin.android.ext.android.getKoin
 

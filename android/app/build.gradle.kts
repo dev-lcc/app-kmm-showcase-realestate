@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "devlcc.io.kmmshowcaserealestate.android"
+    namespace = "devlcc.io.kmmshowcaserealestate.android.app"
     compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
         applicationId = "devlcc.io.kmmshowcaserealestate.android"

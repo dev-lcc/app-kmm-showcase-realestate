@@ -1,4 +1,4 @@
-package devlcc.io.kmmshowcaserealestate.android.listings
+package devlcc.io.kmmshowcaserealestate.android.app.listings
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
