@@ -1,6 +1,7 @@
-package devlcc.io.kmmshowcaserealestate.android
+package devlcc.io.kmmshowcaserealestate.android.app
 
 import android.app.Application
+import devlcc.io.kmmshowcaserealestate.android.app.BuildConfig
 import devlcc.io.kmmshowcaserealestate.core.data.getCoreDataModule
 import devlcc.io.kmmshowcaserealestate.core.datastore.getCoreDatastoreModule
 import devlcc.io.kmmshowcaserealestate.viewmodel.di.getViewModelModule
