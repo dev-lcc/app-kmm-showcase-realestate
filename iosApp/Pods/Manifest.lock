@@ -22,7 +22,7 @@ EXTERNAL SOURCES:
     :path: "../shared/core/data"
 
 SPEC CHECKSUMS:
-  data: d80f3ba50e5c27b380b29ec602ad40501d765a77
+  data: 995e3adccf5d06099e4e7a1bb07e0bb39fd3c8af
   KMPNativeCoroutinesAsync: 52d2aea7ae1d85309ec6d72caeda923ec34af544
   KMPNativeCoroutinesCombine: faa5064e9467f2fc406780de9171d0c9bb8704f5
   KMPNativeCoroutinesCore: af011852578ab7abdad5e5c17a25d272efb3516b
