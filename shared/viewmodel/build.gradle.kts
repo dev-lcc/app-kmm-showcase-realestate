@@ -2,6 +2,7 @@ plugins {
     kotlin("multiplatform")
 //    kotlin("native.cocoapods")
     id("com.android.library")
+    id("com.google.devtools.ksp")
     id("com.rickclephas.kmp.nativecoroutines")
 }
 
@@ -31,6 +32,7 @@ kotlin {
 
                 implementation(libs.coroutines.core)
                 implementation(libs.koin.core)
+                implementation(libs.kmm.viewmodel)
                 implementation(libs.touchlab.kermit)
             }
         }
@@ -50,7 +52,8 @@ kotlin {
                 implementation(libs.koin.android)
             }
         }
-        val androidTest by getting
+        val androidUnitTest by getting
+        val androidInstrumentedTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting

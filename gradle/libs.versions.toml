@@ -4,37 +4,40 @@ minSdk = "21"
 targetSdk = "33"
 compileSdk = "33"
 
-kotlin = "1.7.20"
-gradlePluginAndroid = "7.2.2"
+kotlin = "1.8.0"    #"1.7.21"
+gradlePluginAndroid = "7.4.0"#"7.2.2"
 
 # Dependencies
 desugarJdkLibs = "1.1.5"
 androidXCore = "1.9.0"
 androidXActivity = "1.6.0"
 androidxAppCompat = "1.5.1"
-androidXComposeCompiler = "1.3.2"
-androidxComposeBom = "2022.10.00"
-androidXComposeUiTooling = "1.3.0"
-androidXComposeUiToolingPreview = "1.3.0"
+androidXComposeCompiler = "1.4.0"#"1.3.2"
+androidxComposeBom = "2023.01.00"#"2022.10.00"
+androidXComposeUiTooling = "1.3.3"
+androidXComposeUiToolingPreview = "1.3.3"
 lifecycle = "2.5.1"
 roboelectric = "4.8.2"
-accompanist = "0.27.0"  #"v0.26.3-beta"
+accompanist = "0.28.0"    #"0.27.0"  #"v0.26.3-beta"
 
 workManager = "2.7.1"
 
 coroutines = "1.6.4"
-kmpNativeCoroutines = "0.13.0"
-multiplatformSettings = "1.0.0-alpha01"
-koin = "3.2.1"
-ktor = "2.1.1"
-sqlDelight = "1.5.3"
-kotlinxSerializationVersion = "1.4.0"
+kmpNativeCoroutines = "v1.0.0-ALPHA-4"
+kmmViewModel = "1.0.0-ALPHA-3"
+multiplatformSettings = "1.0.0"
+koin = "3.3.2"
+ktor = "2.2.2"
+sqlDelight = "1.5.5"
+kotlinxSerializationVersion = "1.5.0-RC"#"1.4.0"
 kotlinxDatetime = "0.4.0"
 
-touchlabKermit = "1.1.3"
+touchlabKermit = "1.2.2"#"1.1.3"
 touchlabStately = "1.2.2"
 
-turbine = "0.10.0"
+turbine = "0.12.1"#"0.10.0"
+
+googleKsp = "1.8.0-1.0.9"
 
 junit = "4.13.2"
 junitKtx = "1.1.3"
@@ -113,6 +116,8 @@ sqlDelight-coroutinesExt = { module = "com.squareup.sqldelight:coroutines-extens
 sqlDelight-native = { module = "com.squareup.sqldelight:native-driver", version.ref = "sqlDelight" }
 sqlDelight-runtime = { module = "com.squareup.sqldelight:runtime", version.ref = "sqlDelight" }
 
+kmm-viewmodel = { module = "com.rickclephas.kmm:kmm-viewmodel-core", version.ref = "kmmViewModel" }
+
 touchlab-kermit = { module = "co.touchlab:kermit", version.ref = "touchlabKermit" }
 touchlab-stately = { module = "co.touchlab:stately-common", version.ref = "touchlabStately" }
 
@@ -127,6 +132,7 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 sqlDelight = { id = "com.squareup.sqldelight", version.ref = "sqlDelight" }
 kmpNativeCoroutines = { id = "com.rickclephas.kmp.nativecoroutines", version.ref = "kmpNativeCoroutines" }
+googleKsp = { id = "com.google.devtools.ksp", version.ref = "googleKsp" }
 
 [bundles]
 app-ui = [

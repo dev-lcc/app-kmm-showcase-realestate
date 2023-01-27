@@ -2,6 +2,7 @@ plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
+    id("com.google.devtools.ksp")
     id("com.rickclephas.kmp.nativecoroutines")
 }
 
@@ -64,7 +65,8 @@ kotlin {
                 implementation(libs.koin.android)
             }
         }
-        val androidTest by getting {
+        val androidUnitTest by getting
+        val androidInstrumentedTest by getting {
             dependencies {
                 implementation(libs.workManager.test)
             }
