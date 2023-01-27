@@ -4,16 +4,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.lazy.grid.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
@@ -50,17 +47,16 @@ fun Listings(
         viewModel.uiState.flowWithLifecycle(lifecycleOwner.lifecycle)
     }
 
-    val uiState by lifecycleAwareFlow.collectAsState(initial = viewModel.uiState.value)
+    @Suppress("UNUSED_VARIABLE") val uiState by lifecycleAwareFlow.collectAsState(initial = viewModel.uiState.value)
 
-    val listState = rememberLazyListState()
+    val gridState = rememberLazyGridState()
 
-    LazyRow(
-        state = listState,
+    LazyVerticalGrid(columns = GridCells.Fixed(2),
         modifier = modifier,
-        verticalAlignment = Alignment.Top,
-    ) {
-        items(
-            listOf(
+        state = gridState,
+        contentPadding = PaddingValues(4.dp),
+        content = {
+            val sampleList = listOf(
                 Property(
                     propertyID = "M9941116325",
                     listingID = "2946805109",
@@ -114,20 +110,21 @@ fun Listings(
                     buildingSize = BuildingSize(size = 2_200, units = "sqft"),
                 ),
             )
-        ) { prop ->
-            ListingFeaturedPropertyItem(
-                which = prop,
-                onClick = { which: Property ->
-                    // TODO:: onClick
-                    logger.d("onClick() -> which = $which")
-                }
-            )
-
-            Spacer(
-                modifier = Modifier.width(12.dp)
-            )
-        }
-    }
+            items(count = sampleList.size,
+                key = { sampleList[it].listingID ?: "" },
+                span = { GridItemSpan(1) },
+                itemContent = {
+                    Box(
+                        Modifier.padding(4.dp)
+                    ) {
+                        ListingFeaturedPropertyItem(which = sampleList[it],
+                            onClick = { which: Property ->
+                                // TODO:: onClick
+                                logger.d("onClick() -> which = $which")
+                            })
+                    }
+                })
+        })
 
 }
 
@@ -136,30 +133,45 @@ fun Listings(
 fun ListingsPreview() {
     AppTheme {
         Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
+            modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
         ) {
-            Listings(
-                viewModel = ListingsViewModel(
-                    propertiesRepository = object: PropertiesRepository {
-                        override suspend fun getPropertiesByType(type: Property.Type, offset: Int, limit: Int, sort: Property.Sort): List<Property> { TODO("Not yet implemented") }
-                        override fun getPropertiesByTypeStream(type: Property.Type, offset: Int, limit: Int, sort: Property.Sort): Flow<List<Property>> { TODO("Not yet implemented") }
-                        override fun getProperty(propertyId: String): Flow<Property> { TODO("Not yet implemented") }
-                        override suspend fun searchProperties(keyword: String, offset: Int, limit: Int, sort: Property.Sort): List<Property> { TODO("Not yet implemented") }
-                        override fun searchPropertiesStream(keyword: String, offset: Int, limit: Int, sort: Property.Sort): Flow<List<Property>> { TODO("Not yet implemented") }
-                    }
-                ),
-                logger = Logger.withTag("ListingsPreview")
-            )
+            Listings(viewModel = ListingsViewModel(propertiesRepository = object :
+                PropertiesRepository {
+                override suspend fun getPropertiesByType(
+                    type: Property.Type, offset: Int, limit: Int, sort: Property.Sort
+                ): List<Property> {
+                    TODO("Not yet implemented")
+                }
+
+                override fun getPropertiesByTypeStream(
+                    type: Property.Type, offset: Int, limit: Int, sort: Property.Sort
+                ): Flow<List<Property>> {
+                    TODO("Not yet implemented")
+                }
+
+                override fun getProperty(propertyId: String): Flow<Property> {
+                    TODO("Not yet implemented")
+                }
+
+                override suspend fun searchProperties(
+                    keyword: String, offset: Int, limit: Int, sort: Property.Sort
+                ): List<Property> {
+                    TODO("Not yet implemented")
+                }
+
+                override fun searchPropertiesStream(
+                    keyword: String, offset: Int, limit: Int, sort: Property.Sort
+                ): Flow<List<Property>> {
+                    TODO("Not yet implemented")
+                }
+            }), logger = Logger.withTag("ListingsPreview"))
         }
     }
 }
 
 @Composable
 fun ListingFeaturedPropertyItem(
-    which: Property,
-    onClick: ((Property) -> Unit),
-    modifier: Modifier = Modifier
+    which: Property, onClick: ((Property) -> Unit), modifier: Modifier = Modifier
 ) {
 
     val itemWidth = 176.dp
@@ -168,19 +180,18 @@ fun ListingFeaturedPropertyItem(
     ElevatedCard(
         modifier = modifier
             .width(itemWidth)
-            .clickable { onClick(which) }
-        ,
+            .clickable { onClick(which) },
         shape = RoundedCornerShape(4.dp),
     ) {
         Column(
             modifier = modifier.fillMaxWidth()
         ) {
             Row(
-                 modifier = modifier
-                     .height(bannerHeight)
-                     .padding(4.dp)
-                     .clip(RoundedCornerShape(4.dp))
-                     .background(color = MaterialTheme.colorScheme.primaryContainer)
+                modifier = modifier
+                    .height(bannerHeight)
+                    .padding(4.dp)
+                    .clip(RoundedCornerShape(4.dp))
+                    .background(color = MaterialTheme.colorScheme.primaryContainer)
             ) {
                 Image(
                     imageVector = AppIcons.Location,    // TODO:: Use coil.compose.AsyncImage to load [Property.thumbnail]
@@ -206,8 +217,7 @@ fun ListingFeaturedPropertyItem(
                     modifier = modifier
                         .height(24.dp)
                         .clip(RoundedCornerShape(4.dp))
-                        .clipToBounds()
-                    ,
+                        .clipToBounds(),
                     small = true,
                     colors = AppButtonDefaults.filledButtonColors(
                         containerColor = MaterialTheme.colorScheme.primary,
@@ -216,7 +226,7 @@ fun ListingFeaturedPropertyItem(
                     contentPadding = PaddingValues(horizontal = 12.dp, vertical = 0.dp)
                 ) {
                     Text(
-                        text = when(which.propStatus) {
+                        text = when (which.propStatus) {
                             Property.Status.ForSale -> "For Sale"
                             Property.Status.ForRent -> "For Rent"
                             else/*Property.Status.NotForSale*/ -> "View"
