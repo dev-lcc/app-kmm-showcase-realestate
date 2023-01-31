@@ -10,11 +10,8 @@ kotlin {
     android()
     iosX64() {
         binaries {
-//            sharedLib {
-//                baseName = "database"
-//            }
             framework {
-                baseName = "database"
+                baseName = "CoreDatabase"
                 isStatic = false
                 linkerOpts("-lsqlite3")
             }
@@ -22,11 +19,8 @@ kotlin {
     }
     iosArm64() {
         binaries {
-//            sharedLib {
-//                baseName = "database"
-//            }
             framework {
-                baseName = "database"
+                baseName = "CoreDatabase"
                 isStatic = false
                 linkerOpts("-lsqlite3")
             }
@@ -34,11 +28,8 @@ kotlin {
     }
     iosSimulatorArm64() {
         binaries {
-//            sharedLib {
-//                baseName = "database"
-//            }
             framework {
-                baseName = "database"
+                baseName = "CoreDatabase"
                 isStatic = false
                 linkerOpts("-lsqlite3")
             }
@@ -50,9 +41,8 @@ kotlin {
 //        homepage = "Link to the Shared Module homepage"
 //        version = "1.0"
 //        ios.deploymentTarget = "15.4"
-//        podfile = project.file("../../../iosApp/Podfile")
 //        framework {
-//            baseName = "database"
+//            baseName = "CoreDatabase"
 //            isStatic = false
 //            linkerOpts("-lsqlite3")
 //        }
@@ -63,6 +53,7 @@ kotlin {
             languageSettings.apply {
                 optIn("kotlin.RequiresOptIn")
                 optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
+                optIn("kotlin.experimental.ExperimentalObjCName")
             }
         }
     }

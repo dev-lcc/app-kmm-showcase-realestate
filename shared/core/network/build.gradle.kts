@@ -1,6 +1,6 @@
 plugins {
     kotlin("multiplatform")
-    kotlin("native.cocoapods")
+//    kotlin("native.cocoapods")
     id("kotlinx-serialization")
     id("com.android.library")
 }
@@ -11,15 +11,24 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
-    cocoapods {
-        summary = "Some description for the Shared Module"
-        homepage = "Link to the Shared Module homepage"
-        version = "1.0"
-        ios.deploymentTarget = "15.4"
-        podfile = project.file("../../../iosApp/Podfile")
-        framework {
-            baseName = "network"
-            isStatic = false
+//    cocoapods {
+//        summary = "Some description for the Shared Module"
+//        homepage = "Link to the Shared Module homepage"
+//        version = "1.0"
+//        ios.deploymentTarget = "15.4"
+//        podfile = project.file("../../../iosApp/Podfile")
+//        framework {
+//            baseName = "network"
+//            isStatic = false
+//        }
+//    }
+
+    sourceSets {
+        all {
+            languageSettings.apply {
+                optIn("kotlin.RequiresOptIn")
+                optIn("kotlin.experimental.ExperimentalObjCName")
+            }
         }
     }
     

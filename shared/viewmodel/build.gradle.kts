@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     kotlin("multiplatform")
 //    kotlin("native.cocoapods")
@@ -12,6 +14,13 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
+    tasks.withType<KotlinCompile>().configureEach {
+        kotlinOptions {
+            apiVersion = "1.4"
+            languageVersion = "1.4"
+        }
+    }
+
 //    cocoapods {
 //        summary = "Some description for the Shared Module"
 //        homepage = "Link to the Shared Module homepage"
@@ -22,7 +31,17 @@ kotlin {
 //            isStatic = false // SwiftUI preview requires dynamic framework
 //        }
 //    }
-    
+
+    sourceSets {
+        all {
+            languageSettings.apply {
+                optIn("kotlin.RequiresOptIn")
+                optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
+                optIn("kotlin.experimental.ExperimentalObjCName")
+            }
+        }
+    }
+
     sourceSets {
         val commonMain by getting {
             dependencies {

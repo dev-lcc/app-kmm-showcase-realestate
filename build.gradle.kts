@@ -9,6 +9,7 @@ buildscript {
 
     dependencies {
         classpath("com.rickclephas.kmp:kmp-nativecoroutines-gradle-plugin:1.0.0-ALPHA-4")
+        classpath("com.chromaticnoise.multiplatform-swiftpackage:com.chromaticnoise.multiplatform-swiftpackage.gradle.plugin:2.0.3")
     }
 }
 
@@ -23,7 +24,6 @@ plugins {
     alias(libs.plugins.kotlinSerialization) apply false
     alias(libs.plugins.sqlDelight) apply false
     alias(libs.plugins.googleKsp) apply false
-    // alias(libs.plugins.kmpNativeCoroutines) apply false
 }
 
 tasks.register("clean", Delete::class) {
