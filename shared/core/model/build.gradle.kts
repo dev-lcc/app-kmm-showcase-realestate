@@ -1,52 +1,34 @@
 plugins {
     kotlin("multiplatform")
-    kotlin("native.cocoapods")
+//    kotlin("native.cocoapods")
     id("com.android.library")
     id("kotlin-parcelize")
 }
 
 kotlin {
     android()
-    iosX64() {
-        binaries {
-            sharedLib {
-                baseName = "model"
-            }
-        }
-    }
-    iosArm64() {
-        binaries {
-            sharedLib {
-                baseName = "model"
-            }
-        }
-    }
-    iosSimulatorArm64() {
-        binaries {
-            sharedLib {
-                baseName = "model"
-            }
-        }
-    }
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
 
-    cocoapods {
-        summary = "Some description for the Shared Module"
-        homepage = "Link to the Shared Module homepage"
-        version = "1.0"
-        ios.deploymentTarget = "15.4"
-        podfile = project.file("../../../iosApp/Podfile")
-
-        framework {
-            baseName = "model"
-            isStatic = false // SwiftUI preview requires dynamic framework
-        }
-    }
+//    cocoapods {
+//        summary = "Some description for the Shared Module"
+//        homepage = "Link to the Shared Module homepage"
+//        version = "1.0"
+//        ios.deploymentTarget = "15.4"
+//        podfile = project.file("../../../iosApp/Podfile")
+//
+//        framework {
+//            baseName = "model"
+//            isStatic = false // SwiftUI preview requires dynamic framework
+//        }
+//    }
 
     sourceSets {
         all {
             languageSettings.apply {
                 optIn("kotlin.RequiresOptIn")
-                optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
+                optIn("kotlin.experimental.ExperimentalObjCName")
             }
         }
     }
@@ -59,7 +41,8 @@ kotlin {
             }
         }
         val androidMain by getting
-        val androidTest by getting
+        val androidUnitTest by getting
+        val androidInstrumentedTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting

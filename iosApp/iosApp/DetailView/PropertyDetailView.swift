@@ -7,11 +7,11 @@
 //
 
 import SwiftUI
-import data
+import KMMShowcaseKit
 
 struct PropertyDetailView: View {
     
-    var property: ModelProperty
+    var property: Property
     
     var body: some View {
         
@@ -32,7 +32,7 @@ struct PropertyDetailView: View {
         
     }
     
-    private func getTitle(_ address: ModelAddress?) -> String {
+    private func getTitle(_ address: Address?) -> String {
         let address1 = address?.neighborhoodName ?? "???"
         let address2 = address?.city ?? "<Unknown City>"
         let address3 = address?.county ?? "<Unknown Country>"
@@ -49,7 +49,7 @@ struct PropertyDetailView_Previews: PreviewProvider {
         )
     }
     
-    fileprivate static let SAMPLE_PROPERTY = ModelProperty(
+    fileprivate static let SAMPLE_PROPERTY = Property(
         propertyID: "M9941116325",
         listingID: "2946805109",
         products: [.coreagent],
@@ -57,14 +57,14 @@ struct PropertyDetailView_Previews: PreviewProvider {
         propType: .condo,
         propSubType: .condos,
         virtualTour: nil,
-        address: ModelAddress(city: "Pasig", line: nil, postalCode: "1600", stateCode: nil, state: "Metro Manila", county: "Philippines", fipsCode: nil, countyNeededForUniq: nil, lat: nil, lon: nil, neighborhoodName: "Lumiere Residences", timeZone: "GMT+8"),
+        address: Address(city: "Pasig", line: nil, postalCode: "1600", stateCode: nil, state: "Metro Manila", county: "Philippines", fipsCode: nil, countyNeededForUniq: nil, lat: nil, lon: nil, neighborhoodName: "Lumiere Residences", timeZone: "GMT+8"),
         branding: nil,
         propStatus: .forrent,
         price: KotlinLong(integerLiteral: 25000000),
         bathsFull: KotlinInt(int: 1),
         baths: KotlinInt(int: 1),
         beds: KotlinInt(int: 2),
-        buildingSize: ModelBuildingSize(size: 49, units: "sqm"),
+        buildingSize: BuildingSize(size: 49, units: "sqm"),
         openHouses: [],
         agents: [],
         office: nil,

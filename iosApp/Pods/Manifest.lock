@@ -1,32 +1,47 @@
 PODS:
-  - data (1.0)
-  - KMPNativeCoroutinesAsync (0.13.1):
-    - KMPNativeCoroutinesCore (= 0.13.1)
-  - KMPNativeCoroutinesCombine (0.13.1):
-    - KMPNativeCoroutinesCore (= 0.13.1)
-  - KMPNativeCoroutinesCore (0.13.1)
+  - KMMShowcaseKit (1.0)
+  - KMMViewModelCore (1.0.0-ALPHA-3):
+    - KMMViewModelCoreObjC (= 1.0.0-ALPHA-3)
+  - KMMViewModelCoreObjC (1.0.0-ALPHA-3)
+  - KMMViewModelSwiftUI (1.0.0-ALPHA-3):
+    - KMMViewModelCore (= 1.0.0-ALPHA-3)
+  - KMPNativeCoroutinesAsync (1.0.0-ALPHA-4):
+    - KMPNativeCoroutinesCore (= 1.0.0-ALPHA-4)
+  - KMPNativeCoroutinesCombine (1.0.0-ALPHA-4):
+    - KMPNativeCoroutinesCore (= 1.0.0-ALPHA-4)
+  - KMPNativeCoroutinesCore (1.0.0-ALPHA-4)
 
 DEPENDENCIES:
-  - data (from `../shared/core/data`)
-  - KMPNativeCoroutinesAsync (~> 0.13.1)
-  - KMPNativeCoroutinesCombine (~> 0.13.1)
+  - KMMShowcaseKit (from `../shared/kmmbridge`)
+  - KMMViewModelCore (~> 1.0.0-ALPHA-3)
+  - KMMViewModelCoreObjC (~> 1.0.0-ALPHA-3)
+  - KMMViewModelSwiftUI (~> 1.0.0-ALPHA-3)
+  - KMPNativeCoroutinesAsync (~> 1.0.0-ALPHA-4)
+  - KMPNativeCoroutinesCombine (~> 1.0.0-ALPHA-4)
+  - KMPNativeCoroutinesCore (~> 1.0.0-ALPHA-4)
 
 SPEC REPOS:
   trunk:
+    - KMMViewModelCore
+    - KMMViewModelCoreObjC
+    - KMMViewModelSwiftUI
     - KMPNativeCoroutinesAsync
     - KMPNativeCoroutinesCombine
     - KMPNativeCoroutinesCore
 
 EXTERNAL SOURCES:
-  data:
-    :path: "../shared/core/data"
+  KMMShowcaseKit:
+    :path: "../shared/kmmbridge"
 
 SPEC CHECKSUMS:
-  data: 995e3adccf5d06099e4e7a1bb07e0bb39fd3c8af
-  KMPNativeCoroutinesAsync: 52d2aea7ae1d85309ec6d72caeda923ec34af544
-  KMPNativeCoroutinesCombine: faa5064e9467f2fc406780de9171d0c9bb8704f5
-  KMPNativeCoroutinesCore: af011852578ab7abdad5e5c17a25d272efb3516b
+  KMMShowcaseKit: 0f2d39684e70d0afaa4c3ec32f93ec80d597c472
+  KMMViewModelCore: f0c25833d70b43cafce129331f6549acf262d996
+  KMMViewModelCoreObjC: 99d93b3064e60442334f3f6a4a5072524972cd82
+  KMMViewModelSwiftUI: 101532cc6914e5b1d5e9a6a0f9a2479977003653
+  KMPNativeCoroutinesAsync: 70e9edb1cced4433bc4528876d410e21e8364d72
+  KMPNativeCoroutinesCombine: 886b9f8b8aa1707de83db5d424915e9a5edc5794
+  KMPNativeCoroutinesCore: 205faa08d2486ecc3ac29f88063c858a85b33de7
 
-PODFILE CHECKSUM: 36695c623ba877c9c5a79abdf47b5d8f51f7f97c
+PODFILE CHECKSUM: 70edd09ac8752be20479b26f9956e6c0947af229
 
 COCOAPODS: 1.11.3

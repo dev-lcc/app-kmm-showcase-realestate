@@ -1,26 +1,28 @@
 package devlcc.io.kmmshowcaserealestate.android.app
 
 import android.app.Application
-import devlcc.io.kmmshowcaserealestate.android.app.BuildConfig
-import devlcc.io.kmmshowcaserealestate.core.data.getCoreDataModule
-import devlcc.io.kmmshowcaserealestate.core.datastore.getCoreDatastoreModule
+import devlcc.io.kmmshowcaserealestate.core.data.di.initKoinAndroid
+import devlcc.io.kmmshowcaserealestate.core.data.managers.WorkerBGTaskManager
 import devlcc.io.kmmshowcaserealestate.viewmodel.di.getViewModelModule
-import org.koin.android.ext.koin.androidContext
-import org.koin.core.context.startKoin
 
 class KMMShowcaseRealEstateApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
 
-        startKoin {
-            androidContext(applicationContext)
+        val koinApp = initKoinAndroid(
+            isDebug = BuildConfig.DEBUG,
+            context = this@KMMShowcaseRealEstateApplication,
+        ).apply {
             modules(
-                getCoreDataModule(isDebug = BuildConfig.DEBUG),
-                getCoreDatastoreModule(),
-                getViewModelModule(),
+                listOf(
+                    getViewModelModule()
+                )
             )
         }
+
+//        val bgTaskManager = koinApp.koin.get<WorkerBGTaskManager>()
+//        bgTaskManager.dispatchOperationFetchPropertyData()
 
     }
 

@@ -70,6 +70,8 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test)
     androidTestImplementation(libs.androidx.compose.ui.testManifest)
 
+    implementation(libs.kmm.viewmodel)
+
     implementation(libs.koin.core)
     implementation(libs.koin.android)
     testImplementation(libs.koin.test)

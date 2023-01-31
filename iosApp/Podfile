@@ -2,11 +2,14 @@ platform :ios, '15.4'
 use_frameworks!
 
 target 'iosApp' do
-  pod 'data', :path => '../shared/core/data'
-#   pod 'datastore', :path => '../shared/core/datastore'
-#    pod 'model', :path => '../shared/core/model'
+#  pod 'data', :path => '../shared/core/data'
+  pod 'KMMShowcaseKit', :path => '../shared/kmmbridge'
 
 #   pod "SwiftUIRefresh"
-  pod 'KMPNativeCoroutinesAsync', '~> 0.13.1' #:git => 'https://github.com/rickclephas/KMP-NativeCoroutines.git', :tag => '0.13.1'
-  pod 'KMPNativeCoroutinesCombine', '~> 0.13.1' #:git => 'https://github.com/rickclephas/KMP-NativeCoroutines.git', :tag => '0.13.1'
+  pod 'KMMViewModelSwiftUI', '~> 1.0.0-ALPHA-3'
+  pod 'KMMViewModelCoreObjC', '~> 1.0.0-ALPHA-3'
+  pod 'KMMViewModelCore', '~> 1.0.0-ALPHA-3'
+  pod 'KMPNativeCoroutinesCore', '~> 1.0.0-ALPHA-4' #:git => 'https://github.com/rickclephas/KMP-NativeCoroutines.git', :tag => '0.13.3'
+  pod 'KMPNativeCoroutinesAsync', '~> 1.0.0-ALPHA-4' #:git => 'https://github.com/rickclephas/KMP-NativeCoroutines.git', :tag => '0.13.3'
+  pod 'KMPNativeCoroutinesCombine', '~> 1.0.0-ALPHA-4' #:git => 'https://github.com/rickclephas/KMP-NativeCoroutines.git', :tag => '0.13.3'
 end

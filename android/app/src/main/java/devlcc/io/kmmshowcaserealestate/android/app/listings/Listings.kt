@@ -1,19 +1,17 @@
 package devlcc.io.kmmshowcaserealestate.android.app.listings
 
+import android.os.Build
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.lazy.grid.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
@@ -36,7 +34,9 @@ import devlcc.io.kmmshowcaserealestate.core.model.property.Address
 import devlcc.io.kmmshowcaserealestate.core.model.property.BuildingSize
 import devlcc.io.kmmshowcaserealestate.core.model.property.Property
 import devlcc.io.kmmshowcaserealestate.viewmodel.home.ListingsViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import java.text.DecimalFormat
 
 @Composable
@@ -51,115 +51,166 @@ fun Listings(
     }
 
     val uiState by lifecycleAwareFlow.collectAsState(initial = viewModel.uiState.value)
+//    val uiState by viewModel.uiState.collectAsState()
 
-    val listState = rememberLazyListState()
+    val gridState = rememberLazyGridState()
 
-    LazyRow(
-        state = listState,
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
         modifier = modifier,
-        verticalAlignment = Alignment.Top,
-    ) {
-        items(
-            listOf(
-                Property(
-                    propertyID = "M9941116325",
-                    listingID = "2946805109",
-                    propType = Property.Type.Condo,
-                    propSubType = Property.SubType.Condos,
-                    price = 2_500_000,
-                    propStatus = Property.Status.ForSale,
-                    address = Address(neighborhoodName = "Okinawa Summer House"),
-                    bathsFull = 4,
-                    baths = 4,
-                    beds = 4,
-                    buildingSize = BuildingSize(size = 4_402, units = "sqft"),
-                ),
-                Property(
-                    propertyID = "M9941116326",
-                    listingID = "2946805110",
-                    propType = Property.Type.MultiFamily,
-                    propSubType = Property.SubType.Coop,
-                    price = 2_600_000,
-                    propStatus = Property.Status.ForRent,
-                    address = Address(neighborhoodName = "Miami Beach House"),
-                    bathsFull = 3,
-                    baths = 3,
-                    beds = 3,
-                    buildingSize = BuildingSize(size = 3_301, units = "sqft"),
-                ),
-                Property(
-                    propertyID = "M9941116327",
-                    listingID = "2946805111",
-                    propType = Property.Type.Apartment,
-                    propSubType = Property.SubType.Coop,
-                    price = 2_700_000,
-                    propStatus = Property.Status.NotForSale,
-                    address = Address(neighborhoodName = "Florida Grand Party House"),
-                    bathsFull = 5,
-                    baths = 5,
-                    beds = 5,
-                    buildingSize = BuildingSize(size = 5_501, units = "sqft"),
-                ),
-                Property(
-                    propertyID = "M9941116328",
-                    listingID = "2946805112",
-                    propType = Property.Type.Condo,
-                    propSubType = Property.SubType.Coop,
-                    price = 2_800_000,
-                    propStatus = Property.Status.ForRent,
-                    address = Address(neighborhoodName = "Bang Bros Complex Condominium"),
-                    bathsFull = 3,
-                    baths = 3,
-                    beds = 3,
-                    buildingSize = BuildingSize(size = 2_200, units = "sqft"),
-                ),
-            )
-        ) { prop ->
-            ListingFeaturedPropertyItem(
-                which = prop,
-                onClick = { which: Property ->
-                    // TODO:: onClick
-                    logger.d("onClick() -> which = $which")
+        state = gridState,
+        contentPadding = PaddingValues(4.dp),
+        content = {
+            val allProperties = uiState.propertiesForRent + uiState.propertiesForSale + uiState.propertiesSold
+
+            items(
+                items = allProperties,
+                key = { it.propertyID ?: "" },
+                span = { GridItemSpan(1) },
+                itemContent = { property ->
+                    Box(
+                        Modifier.padding(4.dp)
+                    ) {
+                        ListingFeaturedPropertyItem(
+                            which = property,
+                            onClick = { which: Property ->
+                                // TODO:: onClick
+                                logger.d("onClick() -> which = $which")
+                            }
+                        )
+                    }
                 }
             )
-
-            Spacer(
-                modifier = Modifier.width(12.dp)
-            )
         }
-    }
+    )
 
 }
+
+internal val SAMPLE_LISTINGS = listOf(
+    Property(
+        propertyID = "M9941116325",
+        listingID = "2946805109",
+        propType = Property.Type.Condo,
+        propSubType = Property.SubType.Condos,
+        price = 2_500_000,
+        propStatus = Property.Status.ForSale,
+        address = Address(neighborhoodName = "Okinawa Summer House"),
+        bathsFull = 4,
+        baths = 4,
+        beds = 4,
+        buildingSize = BuildingSize(size = 4_402, units = "sqft"),
+    ),
+    Property(
+        propertyID = "M9941116326",
+        listingID = "2946805110",
+        propType = Property.Type.Land,
+        propSubType = Property.SubType.Coop,
+        price = 2_600_000,
+        propStatus = Property.Status.ForRent,
+        address = Address(neighborhoodName = "Miami Beach House"),
+        bathsFull = 3,
+        baths = 3,
+        beds = 3,
+        buildingSize = BuildingSize(size = 3_301, units = "sqft"),
+    ),
+    Property(
+        propertyID = "M9941116327",
+        listingID = "2946805111",
+        propType = Property.Type.Apartment,
+        propSubType = Property.SubType.Coop,
+        price = 2_700_000,
+        propStatus = Property.Status.NotForSale,
+        address = Address(neighborhoodName = "Florida Grand Party House"),
+        bathsFull = 5,
+        baths = 5,
+        beds = 5,
+        buildingSize = BuildingSize(size = 5_501, units = "sqft"),
+    ),
+    Property(
+        propertyID = "M9941116328",
+        listingID = "2946805112",
+        propType = Property.Type.Condo,
+        propSubType = Property.SubType.Coop,
+        price = 2_800_000,
+        propStatus = Property.Status.ForRent,
+        address = Address(neighborhoodName = "Bang Bros Complex Condominium"),
+        bathsFull = 3,
+        baths = 3,
+        beds = 3,
+        buildingSize = BuildingSize(size = 2_200, units = "sqft"),
+    ),
+)
 
 @Preview(widthDp = 240, heightDp = 480)
 @Composable
 fun ListingsPreview() {
     AppTheme {
         Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
+            modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
         ) {
-            Listings(
-                viewModel = ListingsViewModel(
-                    propertiesRepository = object: PropertiesRepository {
-                        override suspend fun getPropertiesByType(type: Property.Type, offset: Int, limit: Int, sort: Property.Sort): List<Property> { TODO("Not yet implemented") }
-                        override fun getPropertiesByTypeStream(type: Property.Type, offset: Int, limit: Int, sort: Property.Sort): Flow<List<Property>> { TODO("Not yet implemented") }
-                        override fun getProperty(propertyId: String): Flow<Property> { TODO("Not yet implemented") }
-                        override suspend fun searchProperties(keyword: String, offset: Int, limit: Int, sort: Property.Sort): List<Property> { TODO("Not yet implemented") }
-                        override fun searchPropertiesStream(keyword: String, offset: Int, limit: Int, sort: Property.Sort): Flow<List<Property>> { TODO("Not yet implemented") }
+            Listings(viewModel = ListingsViewModel(propertiesRepository = object :
+                PropertiesRepository {
+
+                override suspend fun getPropertiesByStatus(
+                    status: Property.Status,
+                    offset: Int,
+                    limit: Int,
+                    sort: Property.Sort
+                ): List<Property> =
+                    SAMPLE_LISTINGS//.filter { it.propStatus == status }
+
+                override fun getPropertiesByStatusStream(
+                    status: Property.Status,
+                    offset: Int,
+                    limit: Int,
+                    sort: Property.Sort
+                ): Flow<List<Property>> =
+                    flow {
+                        delay(100L)
+                        emit(SAMPLE_LISTINGS/*.filter { it.propStatus == status }*/)
                     }
-                ),
-                logger = Logger.withTag("ListingsPreview")
-            )
+
+                override suspend fun getPropertiesByType(
+                    type: Property.Type, offset: Int, limit: Int, sort: Property.Sort
+                ): List<Property> =
+                    SAMPLE_LISTINGS//.filter { it.propType == type }
+
+                override fun getPropertiesByTypeStream(
+                    type: Property.Type, offset: Int, limit: Int, sort: Property.Sort
+                ): Flow<List<Property>> =
+                    flow {
+                        delay(100L)
+                        emit(SAMPLE_LISTINGS/*.filter { it.propType == type }*/)
+                    }
+
+                override suspend fun getProperty(propertyId: String): Property {
+                    return SAMPLE_LISTINGS.first()
+                }
+
+                override fun getPropertyStream(propertyId: String): Flow<Property> =
+                    flow { emit(SAMPLE_LISTINGS.first()) }
+
+                override suspend fun searchProperties(
+                    keyword: String, offset: Int, limit: Int, sort: Property.Sort
+                ): List<Property> {
+                    return SAMPLE_LISTINGS
+                }
+
+                override fun searchPropertiesStream(
+                    keyword: String, offset: Int, limit: Int, sort: Property.Sort
+                ): Flow<List<Property>> =
+                    flow {
+                        delay(100L)
+                        emit(SAMPLE_LISTINGS)
+                    }
+            }), logger = Logger.withTag("ListingsPreview"))
         }
     }
 }
 
 @Composable
 fun ListingFeaturedPropertyItem(
-    which: Property,
-    onClick: ((Property) -> Unit),
-    modifier: Modifier = Modifier
+    which: Property, onClick: ((Property) -> Unit), modifier: Modifier = Modifier
 ) {
 
     val itemWidth = 176.dp
@@ -168,19 +219,18 @@ fun ListingFeaturedPropertyItem(
     ElevatedCard(
         modifier = modifier
             .width(itemWidth)
-            .clickable { onClick(which) }
-        ,
+            .clickable { onClick(which) },
         shape = RoundedCornerShape(4.dp),
     ) {
         Column(
             modifier = modifier.fillMaxWidth()
         ) {
             Row(
-                 modifier = modifier
-                     .height(bannerHeight)
-                     .padding(4.dp)
-                     .clip(RoundedCornerShape(4.dp))
-                     .background(color = MaterialTheme.colorScheme.primaryContainer)
+                modifier = modifier
+                    .height(bannerHeight)
+                    .padding(4.dp)
+                    .clip(RoundedCornerShape(4.dp))
+                    .background(color = MaterialTheme.colorScheme.primaryContainer)
             ) {
                 Image(
                     imageVector = AppIcons.Location,    // TODO:: Use coil.compose.AsyncImage to load [Property.thumbnail]
@@ -206,8 +256,7 @@ fun ListingFeaturedPropertyItem(
                     modifier = modifier
                         .height(24.dp)
                         .clip(RoundedCornerShape(4.dp))
-                        .clipToBounds()
-                    ,
+                        .clipToBounds(),
                     small = true,
                     colors = AppButtonDefaults.filledButtonColors(
                         containerColor = MaterialTheme.colorScheme.primary,
@@ -216,11 +265,18 @@ fun ListingFeaturedPropertyItem(
                     contentPadding = PaddingValues(horizontal = 12.dp, vertical = 0.dp)
                 ) {
                     Text(
-                        text = when(which.propStatus) {
+                        text = when (which.propStatus) {
                             Property.Status.ForSale -> "For Sale"
                             Property.Status.ForRent -> "For Rent"
                             else/*Property.Status.NotForSale*/ -> "View"
-                        }.uppercase(LocalContext.current.resources.configuration.locales.get(0)),
+                        }.uppercase(
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                LocalContext.current.resources.configuration.locales.get(0)
+                            } else {
+                                @Suppress("DEPRECATION")
+                                LocalContext.current.resources.configuration.locale
+                            }
+                        ),
                         fontWeight = FontWeight.SemiBold,
                     )
                 }

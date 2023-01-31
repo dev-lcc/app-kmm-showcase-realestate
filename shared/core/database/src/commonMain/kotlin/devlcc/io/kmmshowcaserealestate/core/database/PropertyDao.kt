@@ -35,7 +35,9 @@ interface PropertyDao {
         keyword: String, offset: Int, limit: Int, sort: Property.Sort = Property.Sort.Default
     ): Flow<List<Property>>
 
-    fun getProperty(propertyId: String): Flow<Property>
+    suspend fun getProperty(propertyId: String): Property
+
+    fun getPropertyStream(propertyId: String): Flow<Property>
 
     suspend fun upsert(property: Property)
 

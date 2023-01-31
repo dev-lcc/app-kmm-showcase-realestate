@@ -97,8 +97,8 @@ class PropertyDaoImpl(
                 offset = offset.toLong(),
                 docsPerPage = limit.toLong(),
             )
-            Property.Sort.Order.Descending -> database.propertyQueries.getPropertiesByStatusDESC(
-                propStatus = json.encodeToString(
+            Property.Sort.Order.Descending -> database.propertyQueries.getPropertiesByTypeDESC(
+                propType = json.encodeToString(
                     Embedded.Type.serializer(),
                     type.toEmbedded(),
                 ),
@@ -123,8 +123,8 @@ class PropertyDaoImpl(
             offset = offset.toLong(),
             docsPerPage = limit.toLong(),
         )
-        Property.Sort.Order.Descending -> database.propertyQueries.getPropertiesByStatusDESC(
-            propStatus = json.encodeToString(
+        Property.Sort.Order.Descending -> database.propertyQueries.getPropertiesByTypeDESC(
+            propType = json.encodeToString(
                 Embedded.Type.serializer(),
                 type.toEmbedded(),
             ),
@@ -188,7 +188,12 @@ class PropertyDaoImpl(
             }
         }
 
-    override fun getProperty(propertyId: String): Flow<Property> =
+    override suspend fun getProperty(propertyId: String): Property =
+        database.propertyQueries.getProperty(propertyId)
+            .executeAsOne()
+            .toModel(json)
+
+    override fun getPropertyStream(propertyId: String): Flow<Property> =
         database.propertyQueries.getProperty(propertyId)
             .asFlow()
             .flowOn(ioDispatcher)

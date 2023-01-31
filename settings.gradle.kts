@@ -25,3 +25,4 @@ include(":shared:viewmodel")
 
 include(":android:app")
 include(":android:core:designsystem")
+include(":shared:kmmbridge")
