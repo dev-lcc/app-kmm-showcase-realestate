@@ -1,11 +1,11 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    kotlin("multiplatform")
-//    kotlin("native.cocoapods")
-    id("com.android.library")
-    id("com.google.devtools.ksp")
-    id("com.rickclephas.kmp.nativecoroutines")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.googleKsp)
+    alias(libs.plugins.kmpNativeCoroutines)
 }
 
 kotlin {
@@ -13,24 +13,6 @@ kotlin {
     iosX64()
     iosArm64()
     iosSimulatorArm64()
-
-    tasks.withType<KotlinCompile>().configureEach {
-        kotlinOptions {
-            apiVersion = "1.4"
-            languageVersion = "1.4"
-        }
-    }
-
-//    cocoapods {
-//        summary = "Some description for the Shared Module"
-//        homepage = "Link to the Shared Module homepage"
-//        version = "1.0"
-//        ios.deploymentTarget = "15.4"
-//        framework {
-//            baseName = "viewmodel"
-//            isStatic = false // SwiftUI preview requires dynamic framework
-//        }
-//    }
 
     sourceSets {
         all {

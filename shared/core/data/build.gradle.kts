@@ -1,9 +1,9 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    kotlin("multiplatform")
-//    kotlin("native.cocoapods")
-    id("com.android.library")
-    id("com.google.devtools.ksp")
-    id("com.rickclephas.kmp.nativecoroutines")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.googleKsp)
+    alias(libs.plugins.kmpNativeCoroutines)
 }
 
 kotlin {
@@ -12,43 +12,13 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
-    targets.withType<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget> {
-        compilations.get("main").kotlinOptions.freeCompilerArgs += "-Xexport-kdoc"
-    }
-
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        kotlinOptions {
-            jvmTarget = JavaVersion.VERSION_1_8.toString()
-            freeCompilerArgs = listOf("-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi")
-        }
-    }
-
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-        kotlinOptions {
-            apiVersion = "1.4"
-            languageVersion = "1.4"
-        }
-    }
-
-//    cocoapods {
-//        summary = "Some description for the Shared Module"
-//        homepage = "Link to the Shared Module homepage"
-//        version = "1.0"
-//        ios.deploymentTarget = "15.4"
-//        podfile = project.file("../../../iosApp/Podfile")
-//        framework {
-//            baseName = "data"
-//            isStatic = false // SwiftUI preview requires dynamic framework
-//            linkerOpts("-lsqlite3")
-//        }
-//    }
-
     sourceSets {
         all {
             languageSettings.apply {
                 optIn("kotlin.RequiresOptIn")
                 optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
                 optIn("kotlin.experimental.ExperimentalObjCName")
+                optIn("kotlinx.coroutines.FlowPreview")
             }
         }
     }

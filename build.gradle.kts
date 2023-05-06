@@ -1,17 +1,18 @@
 val appName by extra { "KMM Real Estate" }
 val versionName by extra { "0.0.1" }
 
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath("com.rickclephas.kmp:kmp-nativecoroutines-gradle-plugin:1.0.0-ALPHA-4")
-        classpath("com.chromaticnoise.multiplatform-swiftpackage:com.chromaticnoise.multiplatform-swiftpackage.gradle.plugin:2.0.3")
-    }
-}
+//// Configure module names for libraries based on Gradle's group name + module name.
+//allprojects {
+//    pluginManager.withPlugin("kotlin-multiplatform") {
+//        val kotlinExtension = project.extensions.getByName("kotlin")
+//                as org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+//        val uniqueName = "${project.group}.${project.name}"
+//
+//        kotlinExtension.targets.withType(org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget::class.java) {
+//            compilations["main"].kotlinOptions.freeCompilerArgs += listOf("-module-name", uniqueName)
+//        }
+//    }
+//}
 
 // https://youtrack.jetbrains.com/issue/KTIJ-19369
 @Suppress("DSL_SCOPE_VIOLATION")
@@ -23,6 +24,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform) apply false
     alias(libs.plugins.kotlinSerialization) apply false
     alias(libs.plugins.sqlDelight) apply false
+    alias(libs.plugins.kmpNativeCoroutines) apply false
     alias(libs.plugins.googleKsp) apply false
 }
 

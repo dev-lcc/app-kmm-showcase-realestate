@@ -1,4 +1,4 @@
-package devlcc.io.kmmshowcaserealestate.android.app.listings
+package devlcc.io.kmmshowcaserealestate.android.app.home.listings
 
 import android.os.Build
 import androidx.compose.foundation.Image

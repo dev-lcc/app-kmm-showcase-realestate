@@ -1,9 +1,9 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    kotlin("multiplatform")
-//    kotlin("native.cocoapods")
-    id("com.android.library")
-    id("com.squareup.sqldelight")
-    id("kotlinx-serialization")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.sqlDelight)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 kotlin {
@@ -35,18 +35,6 @@ kotlin {
             }
         }
     }
-
-//    cocoapods {
-//        summary = "Some description for the Shared Module"
-//        homepage = "Link to the Shared Module homepage"
-//        version = "1.0"
-//        ios.deploymentTarget = "15.4"
-//        framework {
-//            baseName = "CoreDatabase"
-//            isStatic = false
-//            linkerOpts("-lsqlite3")
-//        }
-//    }
 
     sourceSets {
         all {

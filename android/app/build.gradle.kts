@@ -1,6 +1,7 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("com.android.application")
-    kotlin("android")
+    alias(libs.plugins.androidApp)
+    alias(libs.plugins.kotlinAndroid)
 }
 
 android {
@@ -66,6 +67,8 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.ui.util)
+    // Navigation
+    implementation(libs.androidx.navigation.compose)
 
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test)
@@ -75,6 +78,7 @@ dependencies {
 
     implementation(libs.koin.core)
     implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
     testImplementation(libs.koin.test)
 
     implementation(libs.touchlab.kermit)

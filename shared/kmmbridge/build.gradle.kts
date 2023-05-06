@@ -1,12 +1,12 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    kotlin("multiplatform")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.androidLibrary)
     kotlin("native.cocoapods")
-    id("com.android.library")
-    id("com.google.devtools.ksp")
-    id("com.rickclephas.kmp.nativecoroutines")
-    id("com.chromaticnoise.multiplatform-swiftpackage")
+    alias(libs.plugins.googleKsp)
+    alias(libs.plugins.kmpNativeCoroutines)
 }
 
 kotlin {
@@ -14,24 +14,6 @@ kotlin {
     iosX64()
     iosArm64()
     iosSimulatorArm64()
-
-    targets.withType<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget> {
-        compilations.get("main").kotlinOptions.freeCompilerArgs += "-Xexport-kdoc"
-    }
-
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        kotlinOptions {
-            jvmTarget = JavaVersion.VERSION_1_8.toString()
-            freeCompilerArgs = listOf("-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi")
-        }
-    }
-
-    tasks.withType<KotlinCompile>().configureEach {
-        kotlinOptions {
-            apiVersion = "1.4"
-            languageVersion = "1.4"
-        }
-    }
 
     cocoapods {
         name = "KMMShowcaseKit"
@@ -95,15 +77,6 @@ kotlin {
             iosArm64Test.dependsOn(this)
             iosSimulatorArm64Test.dependsOn(this)
         }
-    }
-}
-
-multiplatformSwiftPackage {
-    packageName("KMMShowcaseKit")
-    swiftToolsVersion("5.3")
-    targetPlatforms {
-        iOS { v("13") }
-        macOS{ v("10_15") }
     }
 }
 

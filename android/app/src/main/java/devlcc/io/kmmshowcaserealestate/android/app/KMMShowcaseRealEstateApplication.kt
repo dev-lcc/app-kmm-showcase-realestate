@@ -16,7 +16,7 @@ class KMMShowcaseRealEstateApplication: Application() {
         ).apply {
             modules(
                 listOf(
-                    getViewModelModule()
+                    getViewModelModule(),
                 )
             )
         }

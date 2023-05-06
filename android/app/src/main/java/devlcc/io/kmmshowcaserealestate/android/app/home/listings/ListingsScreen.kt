@@ -1,4 +1,4 @@
-package devlcc.io.kmmshowcaserealestate.android.app.listings
+package devlcc.io.kmmshowcaserealestate.android.app.home.listings
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.*
@@ -14,22 +14,28 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.flowWithLifecycle
 import co.touchlab.kermit.Logger
+import devlcc.io.kmmshowcaserealestate.android.app.R
 import devlcc.io.kmmshowcaserealestate.android.core.designsystem.theme.AppTheme
 import devlcc.io.kmmshowcaserealestate.core.model.property.Address
 import devlcc.io.kmmshowcaserealestate.core.model.property.BuildingSize
 import devlcc.io.kmmshowcaserealestate.core.model.property.Property
 import devlcc.io.kmmshowcaserealestate.viewmodel.home.ListingsUiState
 import devlcc.io.kmmshowcaserealestate.viewmodel.home.ListingsViewModel
+import org.koin.androidx.compose.get
+import org.koin.androidx.compose.getViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Listings(
-    viewModel: ListingsViewModel,
-    logger: Logger,
+fun ListingsScreen(
     modifier: Modifier = Modifier,
+    viewModel: ListingsViewModel = getViewModel(),
+    logger: Logger = get(),
+    onNavigateToDetail: ((Property) -> Unit) = {},
 ) {
     val lifecycleOwner = LocalLifecycleOwner.current
     val lifecycleAwareFlow = remember(viewModel.uiState, lifecycleOwner) {
@@ -38,19 +44,36 @@ fun Listings(
 
     val uiState by lifecycleAwareFlow.collectAsState(initial = viewModel.uiState.value)
 
-    Listings(
-        state = uiState,
-        logger = logger,
-        modifier = modifier,
+    Scaffold(
+        modifier = modifier.fillMaxSize(),
+        topBar = {
+            TopAppBar(
+                title = { Text(text = stringResource(id = R.string.app_title)) },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.onBackground,
+                    titleContentColor = MaterialTheme.colorScheme.onPrimary,
+                )
+            )
+        },
+        containerColor = MaterialTheme.colorScheme.background,
+        content = { padding ->
+            ListingsScreen(
+                modifier = modifier.padding(padding),
+                state = uiState,
+                logger = logger,
+                onNavigateToDetail = onNavigateToDetail
+            )
+        }
     )
 }
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-internal fun Listings(
+internal fun ListingsScreen(
+    modifier: Modifier = Modifier,
     state: ListingsUiState,
     logger: Logger,
-    modifier: Modifier = Modifier,
+    onNavigateToDetail: ((Property) -> Unit) = {},
 ) {
 
     val gridState = rememberLazyGridState()
@@ -81,8 +104,9 @@ internal fun Listings(
                             ListingFeaturedPropertyItem(
                                 which = property,
                                 onClick = { which: Property ->
-                                    // TODO:: onClick
                                     logger.d("onClick() -> which = $which")
+                                    // Navigate to Detail Page
+                                    onNavigateToDetail(which)
                                 }
                             )
                         }
@@ -162,7 +186,7 @@ fun ListingsPreview_Loading() {
         Surface(
             modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
         ) {
-            Listings(
+            ListingsScreen(
                 state = ListingsUiState(isLoading = true),
                 logger = Logger.withTag("ListingsPreview_Loading")
             )
@@ -177,7 +201,7 @@ fun ListingsPreview_Success() {
         Surface(
             modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
         ) {
-            Listings(
+            ListingsScreen(
                 state = ListingsUiState(
                     isLoading = false,
                     propertiesForSale = SAMPLE_LISTINGS.filter { it.propStatus == Property.Status.ForSale },
@@ -197,7 +221,7 @@ fun ListingsPreview_Refresh() {
         Surface(
             modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
         ) {
-            Listings(
+            ListingsScreen(
                 state = ListingsUiState(
                     isLoading = true,
                     propertiesForSale = SAMPLE_LISTINGS.filter { it.propStatus == Property.Status.ForSale },
