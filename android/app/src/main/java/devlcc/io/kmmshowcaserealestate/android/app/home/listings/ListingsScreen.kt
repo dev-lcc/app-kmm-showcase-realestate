@@ -2,7 +2,6 @@ package devlcc.io.kmmshowcaserealestate.android.app.home.listings
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.*
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
@@ -29,7 +28,6 @@ import devlcc.io.kmmshowcaserealestate.viewmodel.home.ListingsViewModel
 import org.koin.androidx.compose.get
 import org.koin.androidx.compose.getViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListingsScreen(
     modifier: Modifier = Modifier,
@@ -44,30 +42,15 @@ fun ListingsScreen(
 
     val uiState by lifecycleAwareFlow.collectAsState(initial = viewModel.uiState.value)
 
-    Scaffold(
-        modifier = modifier.fillMaxSize(),
-        topBar = {
-            TopAppBar(
-                title = { Text(text = stringResource(id = R.string.app_title)) },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.onBackground,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimary,
-                )
-            )
-        },
-        containerColor = MaterialTheme.colorScheme.background,
-        content = { padding ->
-            ListingsScreen(
-                modifier = modifier.padding(padding),
-                state = uiState,
-                logger = logger,
-                onNavigateToDetail = onNavigateToDetail
-            )
-        }
+    ListingsScreen(
+        modifier = modifier,
+        state = uiState,
+        logger = logger,
+        onNavigateToDetail = onNavigateToDetail
     )
+
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 internal fun ListingsScreen(
     modifier: Modifier = Modifier,
@@ -84,43 +67,64 @@ internal fun ListingsScreen(
         }
     )
 
-    Box(Modifier.pullRefresh(pullRefreshState)) {
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            modifier = modifier,
-            state = gridState,
-            contentPadding = PaddingValues(4.dp),
-            content = {
-                val allProperties = state.propertiesForRent + state.propertiesForSale + state.propertiesSold
+    Scaffold(
+        modifier = modifier.fillMaxSize(),
+        topBar = {
+            TopAppBar(
+                title = { Text(text = stringResource(id = R.string.app_title)) },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    titleContentColor = MaterialTheme.colorScheme.onPrimary,
+                )
+            )
+        },
+        containerColor = MaterialTheme.colorScheme.background,
+        content = { padding ->
 
-                items(
-                    items = allProperties,
-                    key = { it.propertyID ?: "" },
-                    span = { GridItemSpan(1) },
-                    itemContent = { property ->
-                        Box(
-                            Modifier.padding(4.dp)
-                        ) {
-                            ListingFeaturedPropertyItem(
-                                which = property,
-                                onClick = { which: Property ->
-                                    logger.d("onClick() -> which = $which")
-                                    // Navigate to Detail Page
-                                    onNavigateToDetail(which)
+            Box(
+                Modifier
+                    .pullRefresh(pullRefreshState)
+                    .padding(padding)
+            ) {
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(2),
+                    modifier = modifier,
+                    state = gridState,
+                    contentPadding = PaddingValues(4.dp),
+                    content = {
+                        val allProperties = state.propertiesForRent + state.propertiesForSale + state.propertiesSold
+
+                        items(
+                            items = allProperties,
+                            key = { it.propertyID ?: "" },
+                            span = { GridItemSpan(1) },
+                            itemContent = { property ->
+                                Box(
+                                    Modifier.padding(4.dp)
+                                ) {
+                                    ListingFeaturedPropertyItem(
+                                        which = property,
+                                        onClick = { which: Property ->
+                                            logger.d("onClick() -> which = $which")
+                                            // Navigate to Detail Page
+                                            onNavigateToDetail(which)
+                                        }
+                                    )
                                 }
-                            )
-                        }
+                            }
+                        )
                     }
                 )
-            }
-        )
 
-        PullRefreshIndicator(
-            refreshing = state.isLoading,
-            state = pullRefreshState,
-            modifier = Modifier.align(Alignment.TopCenter)
-        )
-    }
+                PullRefreshIndicator(
+                    refreshing = state.isLoading,
+                    state = pullRefreshState,
+                    modifier = Modifier.align(Alignment.TopCenter)
+                )
+            }
+
+        }
+    )
 
 }
 
@@ -179,7 +183,7 @@ internal val SAMPLE_LISTINGS = listOf(
     ),
 )
 
-@Preview(widthDp = 240, heightDp = 480)
+@Preview//(widthDp = 240, heightDp = 480)
 @Composable
 fun ListingsPreview_Loading() {
     AppTheme {
@@ -194,7 +198,7 @@ fun ListingsPreview_Loading() {
     }
 }
 
-@Preview(widthDp = 240, heightDp = 480)
+@Preview//widthDp = 240, heightDp = 480)
 @Composable
 fun ListingsPreview_Success() {
     AppTheme {
@@ -214,7 +218,7 @@ fun ListingsPreview_Success() {
     }
 }
 
-@Preview(widthDp = 240, heightDp = 480)
+@Preview//(widthDp = 240, heightDp = 480)
 @Composable
 fun ListingsPreview_Refresh() {
     AppTheme {

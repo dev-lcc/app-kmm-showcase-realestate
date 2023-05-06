@@ -16,6 +16,7 @@ kotlin {
             languageSettings.apply {
                 optIn("kotlin.RequiresOptIn")
                 optIn("kotlin.experimental.ExperimentalObjCName")
+                optIn("kotlin.ExperimentalMultiplatform")
             }
         }
     }

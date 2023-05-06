@@ -617,12 +617,12 @@ object AppButtonDefaults {
     }
     @Composable
     fun filledButtonColors(
-        containerColor: Color = MaterialTheme.colorScheme.onBackground,
+        containerColor: Color = MaterialTheme.colorScheme.primary,
         contentColor: Color = MaterialTheme.colorScheme.onPrimary,
-        disabledContainerColor: Color = MaterialTheme.colorScheme.onBackground.copy(
+        disabledContainerColor: Color = MaterialTheme.colorScheme.primary.copy(
             alpha = DisabledButtonContainerAlpha
         ),
-        disabledContentColor: Color = MaterialTheme.colorScheme.onBackground.copy(
+        disabledContentColor: Color = MaterialTheme.colorScheme.onPrimary.copy(
             alpha = DisabledButtonContentAlpha
         )
     ) = ButtonDefaults.buttonColors(
@@ -635,8 +635,8 @@ object AppButtonDefaults {
     fun outlinedButtonBorder(
         enabled: Boolean,
         width: Dp = 1.dp,
-        color: Color = MaterialTheme.colorScheme.onBackground,
-        disabledColor: Color = MaterialTheme.colorScheme.onBackground.copy(
+        color: Color = MaterialTheme.colorScheme.onPrimary,
+        disabledColor: Color = MaterialTheme.colorScheme.onPrimary.copy(
             alpha = DisabledButtonContainerAlpha
         )
     ): BorderStroke = BorderStroke(
@@ -646,9 +646,9 @@ object AppButtonDefaults {
     @Composable
     fun outlinedButtonColors(
         containerColor: Color = Color.Transparent,
-        contentColor: Color = MaterialTheme.colorScheme.onBackground,
+        contentColor: Color = MaterialTheme.colorScheme.onPrimary,
         disabledContainerColor: Color = Color.Transparent,
-        disabledContentColor: Color = MaterialTheme.colorScheme.onBackground.copy(
+        disabledContentColor: Color = MaterialTheme.colorScheme.onPrimary.copy(
             alpha = DisabledButtonContentAlpha
         )
     ) = ButtonDefaults.outlinedButtonColors(
@@ -660,9 +660,9 @@ object AppButtonDefaults {
     @Composable
     fun textButtonColors(
         containerColor: Color = Color.Transparent,
-        contentColor: Color = MaterialTheme.colorScheme.onBackground,
+        contentColor: Color = MaterialTheme.colorScheme.onPrimary,
         disabledContainerColor: Color = Color.Transparent,
-        disabledContentColor: Color = MaterialTheme.colorScheme.onBackground.copy(
+        disabledContentColor: Color = MaterialTheme.colorScheme.onPrimary.copy(
             alpha = DisabledButtonContentAlpha
         )
     ) = ButtonDefaults.textButtonColors(
@@ -674,7 +674,7 @@ object AppButtonDefaults {
 
     @Composable
     fun iconButtonColors(
-        containerColor: Color = MaterialTheme.colorScheme.onPrimaryContainer,
+        containerColor: Color = MaterialTheme.colorScheme.primaryContainer,
         contentColor: Color = MaterialTheme.colorScheme.onPrimary,
         disabledContainerColor: Color = MaterialTheme.colorScheme.onTertiaryContainer.copy(
             alpha = DisabledButtonContainerAlpha

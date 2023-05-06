@@ -20,6 +20,20 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.androidXComposeCompiler.get()
     }
+    kotlinOptions {
+        jvmTarget = "1.8"
+
+        freeCompilerArgs = freeCompilerArgs + listOf(
+            "-opt-in=androidx.compose.material.ExperimentalMaterialApi",
+            "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
+            "-opt-in=androidx.compose.foundation.ExperimentalFoundationApi",
+            "-opt-in=kotlin.RequiresOptIn",
+            // Enable experimental coroutines APIs, including Flow
+            "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+            "-opt-in=kotlinx.coroutines.FlowPreview",
+            "-opt-in=kotlin.Experimental",
+        )
+    }
     packagingOptions {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"

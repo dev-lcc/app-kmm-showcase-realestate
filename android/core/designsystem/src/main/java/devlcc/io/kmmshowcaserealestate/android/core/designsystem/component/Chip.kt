@@ -24,7 +24,6 @@ import devlcc.io.kmmshowcaserealestate.android.core.designsystem.icon.Icon
  * @param text The text label content describing the attribute.
  */
 @Composable
-@OptIn(ExperimentalMaterial3Api::class)
 fun AppPropertyAttribChip(
     modifier: Modifier = Modifier,
     onClick: (() -> Unit)? = null,
